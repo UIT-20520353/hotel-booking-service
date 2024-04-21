@@ -9,5 +9,6 @@ public interface AuthService {
 
     AuthLoginResponse login(AuthLoginRequest body, EUserRole role);
     void register(AuthRegisterRequest body);
+    void logout();
 
 }

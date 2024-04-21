@@ -2,6 +2,7 @@ package com.service.hotel_booking.services.implement;
 
 import com.service.hotel_booking.config.jwt.GenerateJwtResult;
 import com.service.hotel_booking.config.jwt.JwtProvider;
+import com.service.hotel_booking.config.jwt.SecurityUtils;
 import com.service.hotel_booking.entities.User;
 import com.service.hotel_booking.entities.UserSession;
 import com.service.hotel_booking.entities.request.AuthLoginRequest;
@@ -13,6 +14,7 @@ import com.service.hotel_booking.exceptions.BadRequestException;
 import com.service.hotel_booking.repositories.UserRepository;
 import com.service.hotel_booking.services.AuthService;
 import com.service.hotel_booking.services.UserSessionService;
+import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -32,6 +34,7 @@ public class AuthServiceImpl implements AuthService {
     BCryptPasswordEncoder passwordEncoder;
 
     @Override
+    @Transactional
     public AuthLoginResponse login(AuthLoginRequest body, EUserRole role) {
         if (!userRepository.existsByEmail(body.getEmail())) {
             throw new AuthenticationException(INVALID_CREDENTIAL_ERR);
@@ -53,6 +56,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
+    @Transactional
     public void register(AuthRegisterRequest body) {
         if (userRepository.existsByEmail(body.getEmail())) {
             throw new BadRequestException(USER_ALREADY_EXIST_ERR);
@@ -66,6 +70,13 @@ public class AuthServiceImpl implements AuthService {
                                 .password(passwordEncoder.encode(body.getPassword()))
                                 .role(EUserRole.USER)
                                 .build());
+    }
+
+    @Override
+    @Transactional
+    public void logout() {
+        String tokenId = SecurityUtils.getCurrentTokenId();
+        userSessionService.removeExpiredSession(tokenId);
     }
 
 }
