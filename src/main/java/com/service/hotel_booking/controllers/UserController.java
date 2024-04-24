@@ -2,6 +2,7 @@ package com.service.hotel_booking.controllers;
 
 import com.service.hotel_booking.entities.response.UserWithoutPassword;
 import com.service.hotel_booking.services.UserService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +23,9 @@ public class UserController {
 
     UserService userService;
 
+
     @GetMapping
+    @SecurityRequirement(name = "Authorization")
     public ResponseEntity<List<UserWithoutPassword>> getAllUsers() {
         return ResponseEntity.ok(userService.getAllUsers());
     }
