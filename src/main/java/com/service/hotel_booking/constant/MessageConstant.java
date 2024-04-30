@@ -27,4 +27,8 @@ public class MessageConstant {
 
     public static final String USER_IS_NOT_ADMIN = "error.validate.user.is-not-admin";
 
+    public static final String WARD_NOT_EXIST = "error.ward.not-exist";
+    public static final String DISTRICT_NOT_EXIST = "error.district.not-exist";
+    public static final String PROVINCE_NOT_EXIST = "error.province.not-exist";
+
 }
