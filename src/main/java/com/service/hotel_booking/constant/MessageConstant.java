@@ -31,4 +31,21 @@ public class MessageConstant {
     public static final String DISTRICT_NOT_EXIST = "error.district.not-exist";
     public static final String PROVINCE_NOT_EXIST = "error.province.not-exist";
 
+    public static final String IMAGE_TYPE_INVALID_ERROR = "error.validate.file.image.invalid-file";
+    public static final String IMAGE_SIZE_INVALID_ERROR = "error.validate.file.image.invalid-size";
+    public static final String AUDIO_TYPE_INVALID_ERROR = "error.validate.file.audio.invalid-file";
+    public static final String AUDIO_SIZE_INVALID_ERROR = "error.validate.file.audio.invalid-size";
+    public static final String  VIDEO_TYPE_INVALID_ERROR = "error.validate.file.video.invalid-file";
+    public static final String VIDEO_SIZE_INVALID_ERROR = "error.validate.file.video.invalid-size";
+
+    public static final String IDENTITY_NUMBER_REQUIRED_ERROR = "error.validate.identity-number.required";
+    public static final String IDENTITY_NUMBER_MAX_LENGTH_ERROR = "error.validate.identity-number.length.max";
+    public static final String IDENTITY_NUMBER_MIN_LENGTH_ERROR = "error.validate.identity-number.length.min";
+
+    public static final String FRONT_IDENTITY_CARD_REQUIRED_ERROR = "error.validate.front-identity-card.required";
+    public static final String BACK_IDENTITY_CARD_REQUIRED_ERROR = "error.validate.back-identity-card.required";
+    public static final String SELFIE_IMG_REQUIRED_ERROR = "error.validate.selfie-img.required";
+
+    public static final String ACCOUNT_PENDING_APPROVAL = "error.validate.login.pending-approval";
+
 }

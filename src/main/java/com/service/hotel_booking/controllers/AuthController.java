@@ -1,9 +1,10 @@
 package com.service.hotel_booking.controllers;
 
+import com.service.hotel_booking.entities.request.ArgentRegisterRequest;
 import com.service.hotel_booking.entities.request.AuthLoginRequest;
 import com.service.hotel_booking.entities.request.AuthRegisterRequest;
 import com.service.hotel_booking.entities.response.AuthLoginResponse;
-import com.service.hotel_booking.enumerations.EUserRole;
+import com.service.hotel_booking.enumerations.UserRole;
 import com.service.hotel_booking.services.AuthService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -11,10 +12,8 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping(value ="/api")
@@ -27,7 +26,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<AuthLoginResponse> login(@Valid @RequestBody  AuthLoginRequest body) {
-        return ResponseEntity.ok(authService.login(body, EUserRole.USER));
+        return ResponseEntity.ok(authService.login(body, UserRole.USER));
     }
 
     @PostMapping("/register")
@@ -39,6 +38,16 @@ public class AuthController {
     @PostMapping(value = "/logout")
     public ResponseEntity<Void> logout() {
         authService.logout();
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping(value = "/argent/register",
+                 consumes = { "multipart/form-data" })
+    public ResponseEntity<Void> argentRegister(@Valid @ModelAttribute ArgentRegisterRequest anotherData,
+                                               @RequestPart(name = "frontIdentityCard", required = true) MultipartFile frontIdentityCard,
+                                               @RequestPart(name = "backIdentityCard", required = true) MultipartFile backIdentityCard,
+                                               @RequestPart(name = "selfieImg", required = true) MultipartFile selfieImg) {
+        authService.argentRegister(anotherData, frontIdentityCard, backIdentityCard, selfieImg);
         return ResponseEntity.noContent().build();
     }
 

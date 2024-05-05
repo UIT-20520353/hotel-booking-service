@@ -1,6 +1,7 @@
 package com.service.hotel_booking.entities.response;
 
-import com.service.hotel_booking.enumerations.EUserRole;
+import com.service.hotel_booking.enumerations.UserRole;
+import com.service.hotel_booking.enumerations.UserStatus;
 
 public record UserWithoutPassword(
         Integer id,
@@ -8,6 +9,8 @@ public record UserWithoutPassword(
         String lastName,
         String phoneNumber,
         String email,
-        EUserRole role
+        UserRole role,
+        UserStatus status,
+        ArgentResponse argent
 ) {
 }

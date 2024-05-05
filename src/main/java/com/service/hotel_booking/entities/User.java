@@ -1,7 +1,8 @@
 package com.service.hotel_booking.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.service.hotel_booking.enumerations.EUserRole;
+import com.service.hotel_booking.enumerations.UserRole;
+import com.service.hotel_booking.enumerations.UserStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -37,12 +38,20 @@ public class User {
 
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
-    private EUserRole role;
+    private UserRole role;
+
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private UserStatus status;
 
     @JsonIgnore
     @ToString.Exclude
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<UserSession> sessions;
+
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn()
+    private Argent argent;
 
     public void setNewSession(UserSession session) {
         session.setUser(this);
