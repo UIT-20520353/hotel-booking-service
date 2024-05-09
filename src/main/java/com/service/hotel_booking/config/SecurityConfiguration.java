@@ -65,7 +65,8 @@ public class SecurityConfiguration {
                         .requestMatchers(new AntPathRequestMatcher("/api/register")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/api/argent/register")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/api/location/**")).permitAll()
-                        .requestMatchers(new AntPathRequestMatcher("/api/users")).hasAuthority("ADMIN")
+                        .requestMatchers(new AntPathRequestMatcher("/api/admin/login")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/api/admin/**")).hasAuthority("ADMIN")
 
                         .anyRequest().authenticated()
                 )

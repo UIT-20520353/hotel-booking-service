@@ -1,7 +1,8 @@
 package com.service.hotel_booking.mappers;
 
 import com.service.hotel_booking.entities.User;
-import com.service.hotel_booking.entities.response.UserWithoutPassword;
+import com.service.hotel_booking.entities.response.UserDetailResponse;
+import com.service.hotel_booking.entities.response.UserProfileResponse;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -14,8 +15,8 @@ public class UserMapper {
 
     ArgentMapper argentMapper;
 
-    public UserWithoutPassword toUserWithoutPassword(User user) {
-        return new UserWithoutPassword(
+    public UserDetailResponse toUserDetail(User user) {
+        return new UserDetailResponse(
                 user.getId(),
                 user.getFirstName(),
                 user.getLastName(),
@@ -24,6 +25,18 @@ public class UserMapper {
                 user.getRole(),
                 user.getStatus(),
                 argentMapper.toArgentResponse(user.getArgent()));
+    }
+
+    public UserProfileResponse toUserProfile(User user) {
+        return new UserProfileResponse(
+                user.getId(),
+                user.getFirstName(),
+                user.getLastName(),
+                user.getPhoneNumber(),
+                user.getEmail(),
+                user.getRole(),
+                user.getStatus()
+        );
     }
 
 }

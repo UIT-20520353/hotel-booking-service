@@ -7,6 +7,7 @@ public class MessageConstant {
     public static final String INVALID_CREDENTIAL_ERR = "error.validate.login.invalid-credential";
 
     public static final String USER_ALREADY_EXIST_ERR = "error.validate.user.already-exist";
+    public static final String USER_NOT_EXIST = "error.user.not-exist";
 
     public static final String EMAIL_REQUIRED_ERROR = "error.validate.email.required";
     public static final String EMAIL_FORMAT_ERROR = "error.validate.email.format";
@@ -26,6 +27,10 @@ public class MessageConstant {
     public static final String PHONE_NUMBER_MAX_LENGTH_ERROR = "error.validate.phone-number.length.max";
 
     public static final String USER_IS_NOT_ADMIN = "error.validate.user.is-not-admin";
+    public static final String USER_IS_NOT_ARGENT = "error.validate.user.is-not-argent";
+    public static final String ARGENT_ALREADY_ACTIVE = "error.argent.already-active";
+    public static final String ARGENT_ALREADY_REJECTED = "error.argent.already-rejected";
+    public static final String ARGENT_ALREADY_BLOCKED = "error.argent.already-blocked";
 
     public static final String WARD_NOT_EXIST = "error.ward.not-exist";
     public static final String DISTRICT_NOT_EXIST = "error.district.not-exist";
