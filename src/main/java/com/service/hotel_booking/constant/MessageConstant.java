@@ -53,4 +53,8 @@ public class MessageConstant {
 
     public static final String ACCOUNT_PENDING_APPROVAL = "error.validate.login.pending-approval";
 
+    public static final String HOTEL_SERVICE_REQUIRED_ERROR = "error.validate.hotel-service.required";
+    public static final String HOTEL_SERVICE_NAME_MAX_LENGTH_ERROR = "error.validate.hotel-service-name.length.max";
+    public static final String HOTEL_SERVICE_NOT_EXIST = "error.hotel-service.not-exist";
+
 }
