@@ -3,6 +3,7 @@ package com.service.hotel_booking.controllers;
 import com.service.hotel_booking.entities.request.CreateHotelServiceDtoRequest;
 import com.service.hotel_booking.entities.response.HotelServiceResponseDto;
 import com.service.hotel_booking.services.HotelServiceService;
+import com.service.hotel_booking.services.criteria.HotelServiceCriteria;
 import com.service.hotel_booking.utils.PaginationUtils;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -30,8 +31,8 @@ public class HotelServiceController {
     HotelServiceService hotelServiceService;
 
     @GetMapping
-    public ResponseEntity<List<HotelServiceResponseDto>> getAllHotelServices(@ParameterObject @PageableDefault Pageable pageable) {
-        final Page<HotelServiceResponseDto> page = hotelServiceService.getAllHotelServices(pageable);
+    public ResponseEntity<List<HotelServiceResponseDto>> getAllHotelServices(HotelServiceCriteria criteria, @ParameterObject @PageableDefault Pageable pageable) {
+        final Page<HotelServiceResponseDto> page = hotelServiceService.getAllHotelServices(criteria, pageable);
         final HttpHeaders headers = PaginationUtils
                 .generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
