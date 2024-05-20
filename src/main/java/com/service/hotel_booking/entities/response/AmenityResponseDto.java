@@ -1,6 +1,6 @@
 package com.service.hotel_booking.entities.response;
 
-public record HotelServiceResponseDto(
+public record AmenityResponseDto(
         Long id,
         String name
 ) {

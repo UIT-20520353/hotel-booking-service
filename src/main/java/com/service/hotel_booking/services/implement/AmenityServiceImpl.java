@@ -1,14 +1,14 @@
 package com.service.hotel_booking.services.implement;
 
-import com.service.hotel_booking.entities.HotelService;
-import com.service.hotel_booking.entities.HotelService_;
-import com.service.hotel_booking.entities.request.CreateHotelServiceDtoRequest;
-import com.service.hotel_booking.entities.response.HotelServiceResponseDto;
+import com.service.hotel_booking.entities.Amenity;
+import com.service.hotel_booking.entities.Amenity_;
+import com.service.hotel_booking.entities.request.CreateAmenityDtoRequest;
+import com.service.hotel_booking.entities.response.AmenityResponseDto;
 import com.service.hotel_booking.exceptions.BadRequestException;
-import com.service.hotel_booking.mappers.HotelServiceMapper;
-import com.service.hotel_booking.repositories.HotelServiceRepository;
-import com.service.hotel_booking.services.HotelServiceService;
-import com.service.hotel_booking.services.criteria.HotelServiceCriteria;
+import com.service.hotel_booking.mappers.AmenityMapper;
+import com.service.hotel_booking.repositories.AmenityRepository;
+import com.service.hotel_booking.services.AmenityService;
+import com.service.hotel_booking.services.criteria.AmenityCriteria;
 import com.service.hotel_booking.services.query.QueryService;
 import com.service.hotel_booking.services.query.filter.BooleanFilter;
 import jakarta.transaction.Transactional;
@@ -27,21 +27,21 @@ import static com.service.hotel_booking.constant.MessageConstant.HOTEL_SERVICE_N
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class HotelServiceServiceImpl extends QueryService<HotelService> implements HotelServiceService {
+public class AmenityServiceImpl extends QueryService<Amenity> implements AmenityService {
 
-    HotelServiceRepository hotelServiceRepository;
-    HotelServiceMapper hotelServiceMapper;
+    AmenityRepository amenityRepository;
+    AmenityMapper amenityMapper;
 
     @Override
-    public Page<HotelServiceResponseDto> getAllHotelServices(HotelServiceCriteria criteria, Pageable pageable) {
-        Specification<HotelService> specification = createSpecification(criteria);
-        return hotelServiceRepository.findAll(specification, pageable).map(hotelServiceMapper::toHotelServiceDto);
+    public Page<AmenityResponseDto> getAllAmenities(AmenityCriteria criteria, Pageable pageable) {
+        Specification<Amenity> specification = createSpecification(criteria);
+        return amenityRepository.findAll(specification, pageable).map(amenityMapper::toAmenityDto);
     }
 
     @Override
     @Transactional
-    public void createHotelService(CreateHotelServiceDtoRequest body) {
-        hotelServiceRepository.save(HotelService
+    public void createAmenity(CreateAmenityDtoRequest body) {
+        amenityRepository.save(Amenity
                                         .builder()
                                         .name(body.getName())
                                         .isDeleted(false)
@@ -50,42 +50,42 @@ public class HotelServiceServiceImpl extends QueryService<HotelService> implemen
 
     @Override
     @Transactional
-    public void deleteHotelService(Long id) {
-        HotelService hotelService = hotelServiceRepository
+    public void deleteAmenity(Long id) {
+        Amenity amenity = amenityRepository
                                         .findById(id)
                                         .orElseThrow(() -> new BadRequestException(HOTEL_SERVICE_NOT_EXIST));
 
-        hotelService.setIsDeleted(true);
+        amenity.setIsDeleted(true);
     }
 
     @Override
     @Transactional
-    public void updateHotelService(Long id, CreateHotelServiceDtoRequest body) {
-        HotelService hotelService = hotelServiceRepository
+    public void updateAmenity(Long id, CreateAmenityDtoRequest body) {
+        Amenity amenity = amenityRepository
                 .findById(id)
                 .orElseThrow(() -> new BadRequestException(HOTEL_SERVICE_NOT_EXIST));
 
-        hotelService.setName(body.getName());
+        amenity.setName(body.getName());
     }
 
-    private Specification<HotelService> createSpecification(HotelServiceCriteria criteria) {
-        Specification<HotelService> specification = Specification.where(null);
+    private Specification<Amenity> createSpecification(AmenityCriteria criteria) {
+        Specification<Amenity> specification = Specification.where(null);
 
         BooleanFilter booleanFilter = new BooleanFilter();
         booleanFilter.setEquals(false);
 
         specification = specification.and(buildSpecification(booleanFilter,
-                                                             root -> root.get(HotelService_.isDeleted)));
+                                                             root -> root.get(Amenity_.isDeleted)));
 
         if (criteria != null) {
             if (Objects.nonNull(criteria.getName())) {
                 specification = specification.and(buildSpecification(criteria.getName(),
-                                                                     root -> root.get(HotelService_.name)));
+                                                                     root -> root.get(Amenity_.name)));
             }
 
             if (Objects.nonNull(criteria.getId())) {
                 specification = specification.and(buildSpecification(criteria.getId(),
-                                                                     root -> root.get(HotelService_.id)));
+                                                                     root -> root.get(Amenity_.id)));
             }
         }
 

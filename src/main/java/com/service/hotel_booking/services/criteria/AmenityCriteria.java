@@ -13,19 +13,19 @@ import java.util.Objects;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class HotelServiceCriteria implements Serializable, Criteria {
+public class AmenityCriteria implements Serializable, Criteria {
 
     private LongFilter id;
     private StringFilter name;
 
-    public HotelServiceCriteria(HotelServiceCriteria other) {
+    public AmenityCriteria(AmenityCriteria other) {
         this.id = Objects.nonNull(other.id) ? other.id : null;
         this.name = Objects.nonNull(other.name) ? other.name : null;
     }
 
     @Override
     public Criteria copy() {
-        return new HotelServiceCriteria(this);
+        return new AmenityCriteria(this);
     }
 
 }

@@ -8,7 +8,7 @@ import static com.service.hotel_booking.constant.MessageConstant.HOTEL_SERVICE_N
 import static com.service.hotel_booking.constant.MessageConstant.HOTEL_SERVICE_REQUIRED_ERROR;
 
 @Data
-public class CreateHotelServiceDtoRequest {
+public class CreateAmenityDtoRequest {
 
     @NotBlank(message = HOTEL_SERVICE_REQUIRED_ERROR)
     @Length(max = 100, message = HOTEL_SERVICE_NAME_MAX_LENGTH_ERROR)
