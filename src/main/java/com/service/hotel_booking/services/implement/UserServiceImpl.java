@@ -28,7 +28,7 @@ import static com.service.hotel_booking.constant.MessageConstant.*;
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-public class UserServiceImpl  extends QueryService<User> implements UserService {
+public class UserServiceImpl extends QueryService<User> implements UserService {
 
     UserRepository userRepository;
     UserMapper userMapper;

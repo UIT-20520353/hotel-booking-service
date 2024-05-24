@@ -1,8 +1,9 @@
 package com.service.hotel_booking.controllers;
 
-import com.service.hotel_booking.entities.request.CreateHotelServiceDtoRequest;
-import com.service.hotel_booking.entities.response.HotelServiceResponseDto;
-import com.service.hotel_booking.services.HotelServiceService;
+import com.service.hotel_booking.entities.request.CreateAmenityDtoRequest;
+import com.service.hotel_booking.entities.response.AmenityResponseDto;
+import com.service.hotel_booking.services.AmenityService;
+import com.service.hotel_booking.services.criteria.AmenityCriteria;
 import com.service.hotel_booking.utils.PaginationUtils;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -21,38 +22,38 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.util.List;
 
 @RestController
-@Tag(name = "Hotel Service Resources")
+@Tag(name = "Amenity Resources")
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
-@RequestMapping(value ="/api/hotel-services")
-public class HotelServiceController {
+@RequestMapping(value ="/api/amenities")
+public class AmenityController {
 
-    HotelServiceService hotelServiceService;
+    AmenityService amenityService;
 
     @GetMapping
-    public ResponseEntity<List<HotelServiceResponseDto>> getAllHotelServices(@ParameterObject @PageableDefault Pageable pageable) {
-        final Page<HotelServiceResponseDto> page = hotelServiceService.getAllHotelServices(pageable);
+    public ResponseEntity<List<AmenityResponseDto>> getAllAmenities(AmenityCriteria criteria, @ParameterObject @PageableDefault Pageable pageable) {
+        final Page<AmenityResponseDto> page = amenityService.getAllAmenities(criteria, pageable);
         final HttpHeaders headers = PaginationUtils
                 .generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     @PostMapping
-    public ResponseEntity<Void> createHotelService(@Valid @RequestBody CreateHotelServiceDtoRequest body) {
-        hotelServiceService.createHotelService(body);
+    public ResponseEntity<Void> createAmenity(@Valid @RequestBody CreateAmenityDtoRequest body) {
+        amenityService.createAmenity(body);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteHotelService(@PathVariable Long id) {
-        hotelServiceService.deleteHotelService(id);
+    public ResponseEntity<Void> deleteAmenity(@PathVariable Long id) {
+        amenityService.deleteAmenity(id);
         return ResponseEntity.noContent().build();
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Void> updateHotelService(@PathVariable Long id,
-                                                   @Valid @RequestBody CreateHotelServiceDtoRequest body) {
-        hotelServiceService.updateHotelService(id, body);
+    public ResponseEntity<Void> updateAmenity(@PathVariable Long id,
+                                                   @Valid @RequestBody CreateAmenityDtoRequest body) {
+        amenityService.updateAmenity(id, body);
         return ResponseEntity.noContent().build();
     }
 
