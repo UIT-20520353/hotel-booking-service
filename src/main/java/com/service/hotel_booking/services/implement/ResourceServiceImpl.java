@@ -27,4 +27,12 @@ public class ResourceServiceImpl implements ResourceService {
         return s3Service.uploadFile(key, "hotel-booking-storage-30-04-2024", bytes, List.of("image"), image.getContentType());
     }
 
+    @Override
+    public void checkValidImgList(List<MultipartFile> imgList) {
+        imgList.forEach(img -> {
+            FileUtils.checkFile(img);
+            System.out.println("Valid: " + img.getOriginalFilename());
+        });
+    }
+
 }

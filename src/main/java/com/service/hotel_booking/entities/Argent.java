@@ -1,8 +1,9 @@
 package com.service.hotel_booking.entities;
 
-import com.service.hotel_booking.enumerations.UserStatus;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "t_argents")
@@ -32,5 +33,8 @@ public class Argent {
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_user_id", referencedColumnName = "id", nullable = false)
     private User user;
+
+    @OneToMany(mappedBy = "argent", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Property> properties;
 
 }

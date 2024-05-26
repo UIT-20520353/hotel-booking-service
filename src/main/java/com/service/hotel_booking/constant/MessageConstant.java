@@ -4,6 +4,8 @@ public class MessageConstant {
 
     public MessageConstant() {}
 
+    public static final String UNSUPPORTED_MEDIA_TYPE = "error.validate.media-type.unsupported";
+
     public static final String INVALID_CREDENTIAL_ERR = "error.validate.login.invalid-credential";
 
     public static final String USER_ALREADY_EXIST_ERR = "error.validate.user.already-exist";
@@ -56,5 +58,26 @@ public class MessageConstant {
     public static final String HOTEL_SERVICE_REQUIRED_ERROR = "error.validate.hotel-service.required";
     public static final String HOTEL_SERVICE_NAME_MAX_LENGTH_ERROR = "error.validate.hotel-service-name.length.max";
     public static final String HOTEL_SERVICE_NOT_EXIST = "error.hotel-service.not-exist";
+
+    //      Property message        //
+    public static final String PROPERTY_NAME_REQUIRED_ERROR = "error.validate.property-name.required";
+    public static final String PROPERTY_NAME_MAX_LENGTH_ERROR = "error.validate.property-name.length.max";
+    public static final String PROPERTY_DESCRIPTION_REQUIRED_ERROR = "error.validate.property-description.required";
+    public static final String PROPERTY_ADDRESS_REQUIRED_ERROR = "error.validate.property-address.required";
+    public static final String PROPERTY_ADDRESS_MAX_LENGTH_ERROR = "error.validate.property-address.length.max";
+    public static final String PROPERTY_LONGITUDE_REQUIRED_ERROR = "error.validate.property-longitude.required";
+    public static final String PROPERTY_LONGITUDE_MAX_VALUE_ERROR = "error.validate.property-longitude.value.max";
+    public static final String PROPERTY_LONGITUDE_MIN_VALUE_ERROR = "error.validate.property-longitude.value.min";
+    public static final String PROPERTY_LONGITUDE_DIGITS_ERROR = "error.validate.property-longitude.value.digits";
+    public static final String PROPERTY_LATITUDE_REQUIRED_ERROR = "error.validate.property-latitude.required";
+    public static final String PROPERTY_LATITUDE_MAX_VALUE_ERROR = "error.validate.property-latitude.value.max";
+    public static final String PROPERTY_LATITUDE_MIN_VALUE_ERROR = "error.validate.property-latitude.value.min";
+    public static final String PROPERTY_LATITUDE_DIGITS_ERROR = "error.validate.property-latitude.value.digits";
+    public static final String PROPERTY_STATUS_INVALID_ERROR = "error.validate.property-status.value.invalid";
+    public static final String PROPERTY_STATUS_REQUIRED_ERROR = "error.validate.property-status.required";
+    public static final String PROPERTY_TYPE_INVALID_ERROR = "error.validate.property-type.value.invalid";
+    public static final String PROPERTY_TYPE_REQUIRED_ERROR = "error.validate.property-type.required";
+    public static final String PROPERTY_IMAGE_LIST_REQUIRED_ERROR = "error.validate.property-img-list.required";
+
 
 }

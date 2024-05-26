@@ -2,8 +2,8 @@ package com.service.hotel_booking.utils;
 
 import com.service.hotel_booking.exceptions.BadRequestException;
 import com.service.hotel_booking.exceptions.InternalException;
+import com.service.hotel_booking.exceptions.UnsupportedMediaTypeStatusException;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.server.UnsupportedMediaTypeStatusException;
 
 import java.io.IOException;
 import java.util.List;
@@ -23,6 +23,7 @@ public final class FileUtils {
     private FileUtils() {}
 
     public static String getExtension(String mimeType) {
+        System.out.println(mimeType);
         return switch (mimeType) {
             case "image/jpeg" -> "jpeg";
             case "image/png" -> "png";
@@ -32,7 +33,8 @@ public final class FileUtils {
             case "video/quicktime" -> "mov";
             case "audio/mpeg" -> "mp3";
             case "text/plain" -> "txt";
-            default -> throw new UnsupportedMediaTypeStatusException("");
+            case "application/vnd.openxmlformats-officedocument.wordprocessingml.document" -> "docx";
+            default -> throw new UnsupportedMediaTypeStatusException(UNSUPPORTED_MEDIA_TYPE);
         };
     }
 

@@ -26,6 +26,7 @@ import java.util.Objects;
 public class ExceptionTranslator implements ProblemHandling, SecurityAdviceTrait {
 
     public static final String BAD_REQUEST_TITLE = "Bad Request";
+    public static final String UNSUPPORTED_MEDIA_TYPE_TITLE = "Unsupported Media Type";
     public static final String BODY_MISSING_MSG = "Required request body is missing";
     public static final String INTERNAL_ERROR_MSG = "Oops!!! something went wrong please try again or check out our help area";
 
