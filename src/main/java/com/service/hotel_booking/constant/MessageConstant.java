@@ -78,6 +78,10 @@ public class MessageConstant {
     public static final String PROPERTY_TYPE_INVALID_ERROR = "error.validate.property-type.value.invalid";
     public static final String PROPERTY_TYPE_REQUIRED_ERROR = "error.validate.property-type.required";
     public static final String PROPERTY_IMAGE_LIST_REQUIRED_ERROR = "error.validate.property-img-list.required";
+    public static final String PROPERTY_WARD_ID_REQUIRED_ERROR = "error.validate.property-ward-id.required";
+    public static final String PROPERTY_DISTRICT_ID_REQUIRED_ERROR = "error.validate.property-district-id.required";
+    public static final String PROPERTY_PROVINCE_ID_REQUIRED_ERROR = "error.validate.property-province-id.required";
+    public static final String PROPERTY_ARGENT_ID_REQUIRED_ERROR = "error.validate.property-argent-id.required";
 
 
 }

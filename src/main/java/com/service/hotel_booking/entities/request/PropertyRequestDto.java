@@ -44,4 +44,16 @@ public class PropertyRequestDto {
     @NotNull(message = PROPERTY_IMAGE_LIST_REQUIRED_ERROR)
     List<MultipartFile> imgList;
 
+    @NotNull(message = PROPERTY_WARD_ID_REQUIRED_ERROR)
+    private Integer wardId;
+
+    @NotNull(message = PROPERTY_DISTRICT_ID_REQUIRED_ERROR)
+    private Integer districtId;
+
+    @NotNull(message = PROPERTY_PROVINCE_ID_REQUIRED_ERROR)
+    private Integer provinceId;
+
+    @NotNull(message = PROPERTY_ARGENT_ID_REQUIRED_ERROR)
+    private Long argentId;
+
 }
