@@ -10,8 +10,8 @@ import com.service.hotel_booking.entities.request.ArgentRegisterRequest;
 import com.service.hotel_booking.entities.request.AuthLoginRequest;
 import com.service.hotel_booking.entities.request.AuthRegisterRequest;
 import com.service.hotel_booking.entities.response.AuthLoginResponse;
-import com.service.hotel_booking.enumerations.UserStatus;
 import com.service.hotel_booking.enumerations.UserRole;
+import com.service.hotel_booking.enumerations.UserStatus;
 import com.service.hotel_booking.exceptions.AuthenticationException;
 import com.service.hotel_booking.exceptions.BadRequestException;
 import com.service.hotel_booking.repositories.ArgentRepository;
@@ -26,7 +26,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import static com.service.hotel_booking.constant.MessageConstant.*;
 
@@ -95,14 +94,14 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     @Transactional
-    public void argentRegister(ArgentRegisterRequest request, MultipartFile frontIdentityCard, MultipartFile backIdentityCard, MultipartFile selfieImg) {
+    public void argentRegister(ArgentRegisterRequest request) {
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new BadRequestException(USER_ALREADY_EXIST_ERR);
         }
 
-        FileUtils.checkMultipartFileNull(frontIdentityCard, FRONT_IDENTITY_CARD_REQUIRED_ERROR);
-        FileUtils.checkMultipartFileNull(backIdentityCard, BACK_IDENTITY_CARD_REQUIRED_ERROR);
-        FileUtils.checkMultipartFileNull(selfieImg, SELFIE_IMG_REQUIRED_ERROR);
+        FileUtils.checkMultipartFileNull(request.getFrontIdentityCard(), FRONT_IDENTITY_CARD_REQUIRED_ERROR);
+        FileUtils.checkMultipartFileNull(request.getBackIdentityCard(), BACK_IDENTITY_CARD_REQUIRED_ERROR);
+        FileUtils.checkMultipartFileNull(request.getSelfieImg(), SELFIE_IMG_REQUIRED_ERROR);
 
         User user = User.builder()
                         .firstName(request.getFirstName())
@@ -115,9 +114,9 @@ public class AuthServiceImpl implements AuthService {
                         .build();
         userRepository.save(user);
 
-        String frontUrl = resourceService.uploadImage(frontIdentityCard);
-        String backUrl = resourceService.uploadImage(backIdentityCard);
-        String selfieUrl = resourceService.uploadImage(selfieImg);
+        String frontUrl = resourceService.uploadImage(request.getFrontIdentityCard());
+        String backUrl = resourceService.uploadImage(request.getBackIdentityCard());
+        String selfieUrl = resourceService.uploadImage(request.getSelfieImg());
         argentRepository.save(Argent
                                       .builder()
                                       .identityNumber(request.getIdentityNumber())

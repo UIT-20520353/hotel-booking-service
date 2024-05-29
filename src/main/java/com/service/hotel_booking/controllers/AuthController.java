@@ -16,7 +16,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping(value ="/api")
@@ -52,11 +51,8 @@ public class AuthController {
 
     @PostMapping(value = "/argent/register",
                  consumes = { "multipart/form-data" })
-    public ResponseEntity<Void> argentRegister(@Valid @ModelAttribute ArgentRegisterRequest anotherData,
-                                               @RequestPart(name = "frontIdentityCard", required = true) MultipartFile frontIdentityCard,
-                                               @RequestPart(name = "backIdentityCard", required = true) MultipartFile backIdentityCard,
-                                               @RequestPart(name = "selfieImg", required = true) MultipartFile selfieImg) {
-        authService.argentRegister(anotherData, frontIdentityCard, backIdentityCard, selfieImg);
+    public ResponseEntity<Void> argentRegister(@Valid @ModelAttribute ArgentRegisterRequest anotherData) {
+        authService.argentRegister(anotherData);
         return ResponseEntity.noContent().build();
     }
 

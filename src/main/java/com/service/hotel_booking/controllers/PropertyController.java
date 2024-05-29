@@ -33,4 +33,10 @@ public class PropertyController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Void> getPropertyDetail(@PathVariable Integer id) {
+        return ResponseEntity.noContent().build();
+    }
+
 }
+

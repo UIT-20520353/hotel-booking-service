@@ -1,7 +1,6 @@
 package com.service.hotel_booking.entities;
 
 import com.service.hotel_booking.enumerations.PropertyStatus;
-import com.service.hotel_booking.enumerations.PropertyType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,13 +19,13 @@ public class Property {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "description")
+    @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name = "address")
+    @Column(name = "address", nullable = false)
     private String address;
 
     @Column(name = "longitude")
@@ -35,13 +34,12 @@ public class Property {
     @Column(name = "latitude")
     private double latitude;
 
-    @Column(name = "type")
-    @Enumerated(EnumType.STRING)
-    private PropertyType type;
-
-    @Column(name = "status")
+    @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
     private PropertyStatus status;
+
+    @Column(name = "price", nullable = false)
+    private Long price;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_ward_id", referencedColumnName = "id", nullable = false)
