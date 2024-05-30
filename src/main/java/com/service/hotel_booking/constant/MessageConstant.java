@@ -82,6 +82,10 @@ public class MessageConstant {
     public static final String PROPERTY_DISTRICT_ID_REQUIRED_ERROR = "error.validate.property-district-id.required";
     public static final String PROPERTY_PROVINCE_ID_REQUIRED_ERROR = "error.validate.property-province-id.required";
     public static final String PROPERTY_ARGENT_ID_REQUIRED_ERROR = "error.validate.property-argent-id.required";
-
+    public static final String PROPERTY_PRICE_REQUIRED_ERROR = "error.validate.property-price.required";
+    public static final String PROPERTY_PRICE_INTEGER_ERROR = "error.validate.property-price.integer";
+    public static final String PROPERTY_AMENITY_ID_INTEGER_ERROR = "error.validate.property-amenity-id.integer";
+    public static final String DISTRICT_NOT_IN_PROVINCE_ERROR = "error.validate.district-not-in-province";
+    public static final String WARD_NOT_IN_DISTRICT_ERROR = "error.validate.ward-not-in-district";
 
 }

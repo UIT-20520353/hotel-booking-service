@@ -28,7 +28,7 @@ public class PropertyController {
     }
 
     @PostMapping(consumes = { "multipart/form-data" })
-    public ResponseEntity<Void> uploadImageList(@ModelAttribute @Valid PropertyRequestDto body) {
+    public ResponseEntity<Void> createProperty(@ModelAttribute @Valid PropertyRequestDto body) {
         propertyService.createProperty(body);
         return ResponseEntity.noContent().build();
     }

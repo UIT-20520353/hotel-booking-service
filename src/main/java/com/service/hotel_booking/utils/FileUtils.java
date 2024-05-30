@@ -23,7 +23,6 @@ public final class FileUtils {
     private FileUtils() {}
 
     public static String getExtension(String mimeType) {
-        System.out.println(mimeType);
         return switch (mimeType) {
             case "image/jpeg" -> "jpeg";
             case "image/png" -> "png";
@@ -34,6 +33,8 @@ public final class FileUtils {
             case "audio/mpeg" -> "mp3";
             case "text/plain" -> "txt";
             case "application/vnd.openxmlformats-officedocument.wordprocessingml.document" -> "docx";
+            case "application/msword" -> "doc";
+            case "image/svg+xml" -> "svg";
             default -> throw new UnsupportedMediaTypeStatusException(UNSUPPORTED_MEDIA_TYPE);
         };
     }

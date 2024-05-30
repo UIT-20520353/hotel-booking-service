@@ -8,11 +8,14 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface WardRepository extends JpaRepository<Ward, Integer>, JpaSpecificationExecutor<Ward> {
 
     @Query("SELECT w FROM Ward w WHERE w.district.id = :districtId")
     List<Ward> getWardByDistrictId(@Param("districtId") Integer districtId);
+
+    Optional<Ward> findByDistrictIdAndId(Integer districtId, Integer id);
 
 }

@@ -50,7 +50,7 @@ public class AuthServiceImpl implements AuthService {
 
         User user = userRepository.findByEmail(body.getEmail());
 
-        if (UserRole.AGENT.equals(user.getRole()) && UserStatus.CREATED.equals(user.getStatus())) {
+        if (UserRole.ARGENT.equals(user.getRole()) && UserStatus.CREATED.equals(user.getStatus())) {
             throw new BadRequestException(ACCOUNT_PENDING_APPROVAL);
         }
 
@@ -109,7 +109,7 @@ public class AuthServiceImpl implements AuthService {
                         .email(request.getEmail())
                         .phoneNumber(request.getPhoneNumber())
                         .password(passwordEncoder.encode(request.getPassword()))
-                        .role(UserRole.AGENT)
+                        .role(UserRole.ARGENT)
                         .status(UserStatus.CREATED)
                         .build();
         userRepository.save(user);

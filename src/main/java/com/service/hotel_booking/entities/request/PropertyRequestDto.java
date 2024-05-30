@@ -1,7 +1,7 @@
 package com.service.hotel_booking.entities.request;
 
-import com.service.hotel_booking.entities.validate.ValidEnum;
-import com.service.hotel_booking.enumerations.PropertyType;
+import com.service.hotel_booking.entities.validate.EachInteger;
+import jakarta.persistence.ElementCollection;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
@@ -37,10 +37,6 @@ public class PropertyRequestDto {
     @Digits(integer = 2, fraction = 7, message = PROPERTY_LATITUDE_DIGITS_ERROR)
     private Double latitude;
 
-    @ValidEnum(enumClass = PropertyType.class, message = PROPERTY_TYPE_INVALID_ERROR)
-    @NotBlank(message = PROPERTY_TYPE_REQUIRED_ERROR)
-    private String type;
-
     @NotNull(message = PROPERTY_IMAGE_LIST_REQUIRED_ERROR)
     List<MultipartFile> imgList;
 
@@ -55,5 +51,13 @@ public class PropertyRequestDto {
 
     @NotNull(message = PROPERTY_ARGENT_ID_REQUIRED_ERROR)
     private Long argentId;
+
+    @NotNull(message = PROPERTY_PRICE_REQUIRED_ERROR)
+    @Digits(integer = 11, fraction = 0, message = PROPERTY_PRICE_INTEGER_ERROR)
+    private Long price;
+
+    @ElementCollection
+    @EachInteger(message = PROPERTY_AMENITY_ID_INTEGER_ERROR)
+    private List<Integer> amenityIds;
 
 }

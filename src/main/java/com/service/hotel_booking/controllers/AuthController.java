@@ -51,8 +51,8 @@ public class AuthController {
 
     @PostMapping(value = "/argent/register",
                  consumes = { "multipart/form-data" })
-    public ResponseEntity<Void> argentRegister(@Valid @ModelAttribute ArgentRegisterRequest anotherData) {
-        authService.argentRegister(anotherData);
+    public ResponseEntity<Void> argentRegister(@Valid @ModelAttribute ArgentRegisterRequest body) {
+        authService.argentRegister(body);
         return ResponseEntity.noContent().build();
     }
 

@@ -55,9 +55,12 @@ public class Property {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_argent_id", referencedColumnName = "id", nullable = false)
-    private Argent argent;
+    private User argent;
 
     @OneToMany(mappedBy = "property", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<PropertyImage> imgList;
+
+    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<PropertyAmenity> amenities;
 
 }

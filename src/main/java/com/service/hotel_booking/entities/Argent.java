@@ -34,7 +34,4 @@ public class Argent {
     @JoinColumn(name = "fk_user_id", referencedColumnName = "id", nullable = false)
     private User user;
 
-    @OneToMany(mappedBy = "argent", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private List<Property> properties;
-
 }
