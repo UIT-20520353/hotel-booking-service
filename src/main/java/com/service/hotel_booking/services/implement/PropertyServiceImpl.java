@@ -2,8 +2,9 @@ package com.service.hotel_booking.services.implement;
 
 import com.service.hotel_booking.entities.*;
 import com.service.hotel_booking.entities.request.PropertyRequestDto;
-import com.service.hotel_booking.enumerations.PropertyStatus;
+import com.service.hotel_booking.entities.response.PropertyDetailDto;
 import com.service.hotel_booking.exceptions.BadRequestException;
+import com.service.hotel_booking.mappers.PropertyMapper;
 import com.service.hotel_booking.repositories.*;
 import com.service.hotel_booking.services.PropertyService;
 import jakarta.transaction.Transactional;
@@ -11,6 +12,8 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 import static com.service.hotel_booking.constant.MessageConstant.*;
 
@@ -24,6 +27,8 @@ public class PropertyServiceImpl implements PropertyService {
     DistrictRepository districtRepository;
     ProvinceRepository provinceRepository;
     PropertyRepository propertyRepository;
+    AmenityRepository amenityRepository;
+    PropertyMapper propertyMapper;
 
     @Override
     @Transactional
@@ -51,6 +56,16 @@ public class PropertyServiceImpl implements PropertyService {
 //                                    .status(PropertyStatus.AVAILABLE)
 //                                    .build());
 
+    }
+
+    @Override
+    public PropertyDetailDto getPropertyDetail(Long id) {
+        Property property = propertyRepository.findById(id)
+                                              .orElseThrow(() -> new BadRequestException(PROPERTY_NOT_EXIST));
+
+        List<Amenity> amenities = amenityRepository.findByIdIn(property.getAmenities().stream().map(amenity -> amenity.getAmenity().getId()).toList());
+
+        return propertyMapper.toPropertyDetail(property, amenities);
     }
 
 }

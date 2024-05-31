@@ -3,7 +3,7 @@ package com.service.hotel_booking.services.implement;
 import com.service.hotel_booking.entities.Amenity;
 import com.service.hotel_booking.entities.Amenity_;
 import com.service.hotel_booking.entities.request.CreateAmenityDtoRequest;
-import com.service.hotel_booking.entities.response.AmenityResponseDto;
+import com.service.hotel_booking.entities.response.AmenityDto;
 import com.service.hotel_booking.exceptions.BadRequestException;
 import com.service.hotel_booking.mappers.AmenityMapper;
 import com.service.hotel_booking.repositories.AmenityRepository;
@@ -33,7 +33,7 @@ public class AmenityServiceImpl extends QueryService<Amenity> implements Amenity
     AmenityMapper amenityMapper;
 
     @Override
-    public Page<AmenityResponseDto> getAllAmenities(AmenityCriteria criteria, Pageable pageable) {
+    public Page<AmenityDto> getAllAmenities(AmenityCriteria criteria, Pageable pageable) {
         Specification<Amenity> specification = createSpecification(criteria);
         return amenityRepository.findAll(specification, pageable).map(amenityMapper::toAmenityDto);
     }

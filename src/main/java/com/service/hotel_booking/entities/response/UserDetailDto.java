@@ -3,7 +3,7 @@ package com.service.hotel_booking.entities.response;
 import com.service.hotel_booking.enumerations.UserRole;
 import com.service.hotel_booking.enumerations.UserStatus;
 
-public record UserDetailResponse(
+public record UserDetailDto(
         Long id,
         String firstName,
         String lastName,
@@ -11,6 +11,6 @@ public record UserDetailResponse(
         String email,
         UserRole role,
         UserStatus status,
-        ArgentResponse argent
+        ArgentDto argent
 ) {
 }

@@ -3,7 +3,7 @@ package com.service.hotel_booking.services.implement;
 import com.service.hotel_booking.entities.User;
 import com.service.hotel_booking.entities.User_;
 import com.service.hotel_booking.entities.request.UpdateUserStatusRequest;
-import com.service.hotel_booking.entities.response.UserDetailResponse;
+import com.service.hotel_booking.entities.response.UserDetailDto;
 import com.service.hotel_booking.entities.response.UserProfileResponse;
 import com.service.hotel_booking.enumerations.UserRole;
 import com.service.hotel_booking.exceptions.BadRequestException;
@@ -34,7 +34,7 @@ public class UserServiceImpl extends QueryService<User> implements UserService {
     UserMapper userMapper;
 
     @Override
-    public Page<UserDetailResponse> getAllUsers(UserCriteria criteria, Pageable pageable) {
+    public Page<UserDetailDto> getAllUsers(UserCriteria criteria, Pageable pageable) {
         Specification<User> specification = createSpecification(criteria);
         return userRepository.findAll(specification, pageable).map(userMapper::toUserDetail);
     }
@@ -77,7 +77,7 @@ public class UserServiceImpl extends QueryService<User> implements UserService {
     }
 
     @Override
-    public UserDetailResponse getUserDetail(Long id) {
+    public UserDetailDto getUserDetail(Long id) {
         User user = userRepository
                 .findById(id)
                 .orElseThrow(() -> new BadRequestException(USER_NOT_EXIST));

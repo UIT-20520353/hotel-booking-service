@@ -1,7 +1,10 @@
 package com.service.hotel_booking.mappers;
 
+import com.service.hotel_booking.entities.District;
 import com.service.hotel_booking.entities.Province;
+import com.service.hotel_booking.entities.Ward;
 import com.service.hotel_booking.entities.response.DetailProvinceResponse;
+import com.service.hotel_booking.entities.response.PropertyProvinceDto;
 import com.service.hotel_booking.entities.response.SimpleProvinceResponse;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +32,17 @@ public class ProvinceMapper {
                 province.getProvinceName(),
                 province.getProvinceType(),
                 province.getDistricts().stream().map(districtMapper::toDistrictResponse).toList()
+        );
+    }
+
+    public PropertyProvinceDto toPropertyProvince(Province province,
+                                                  District district,
+                                                  Ward ward) {
+        return new PropertyProvinceDto(
+                province.getId(),
+                province.getProvinceName(),
+                province.getProvinceType(),
+                districtMapper.toPropertyDistrictDto(district, ward)
         );
     }
 

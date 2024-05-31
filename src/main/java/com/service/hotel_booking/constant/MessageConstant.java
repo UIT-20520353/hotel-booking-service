@@ -60,6 +60,7 @@ public class MessageConstant {
     public static final String HOTEL_SERVICE_NOT_EXIST = "error.hotel-service.not-exist";
 
     //      Property message        //
+    public static final String PROPERTY_NOT_EXIST = "error.property.not-exist";
     public static final String PROPERTY_NAME_REQUIRED_ERROR = "error.validate.property-name.required";
     public static final String PROPERTY_NAME_MAX_LENGTH_ERROR = "error.validate.property-name.length.max";
     public static final String PROPERTY_DESCRIPTION_REQUIRED_ERROR = "error.validate.property-description.required";

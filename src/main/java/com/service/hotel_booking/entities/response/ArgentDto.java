@@ -1,6 +1,6 @@
 package com.service.hotel_booking.entities.response;
 
-public record ArgentResponse(
+public record ArgentDto(
         Integer id,
         String identityNumber,
         String frontIdentityCard,

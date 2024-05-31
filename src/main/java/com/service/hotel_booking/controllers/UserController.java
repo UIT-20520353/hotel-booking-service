@@ -1,7 +1,7 @@
 package com.service.hotel_booking.controllers;
 
 import com.service.hotel_booking.entities.request.UpdateUserStatusRequest;
-import com.service.hotel_booking.entities.response.UserDetailResponse;
+import com.service.hotel_booking.entities.response.UserDetailDto;
 import com.service.hotel_booking.services.UserService;
 import com.service.hotel_booking.services.criteria.UserCriteria;
 import com.service.hotel_booking.utils.PaginationUtils;
@@ -30,16 +30,16 @@ public class UserController {
     UserService userService;
 
     @GetMapping
-    public ResponseEntity<List<UserDetailResponse>> getAllUsers(UserCriteria criteria,
-                                                                 @ParameterObject @PageableDefault Pageable pageable) {
-        final Page<UserDetailResponse> page = userService.getAllUsers(criteria, pageable);
+    public ResponseEntity<List<UserDetailDto>> getAllUsers(UserCriteria criteria,
+                                                           @ParameterObject @PageableDefault Pageable pageable) {
+        final Page<UserDetailDto> page = userService.getAllUsers(criteria, pageable);
         final HttpHeaders headers = PaginationUtils
                 .generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<UserDetailResponse> getUserDetail(@PathVariable Long userId) {
+    public ResponseEntity<UserDetailDto> getUserDetail(@PathVariable Long userId) {
         return ResponseEntity.ok(userService.getUserDetail(userId));
     }
 

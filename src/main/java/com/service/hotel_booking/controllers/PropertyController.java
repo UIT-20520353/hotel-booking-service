@@ -1,6 +1,7 @@
 package com.service.hotel_booking.controllers;
 
 import com.service.hotel_booking.entities.request.PropertyRequestDto;
+import com.service.hotel_booking.entities.response.PropertyDetailDto;
 import com.service.hotel_booking.services.PropertyService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -34,8 +35,8 @@ public class PropertyController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Void> getPropertyDetail(@PathVariable Integer id) {
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<PropertyDetailDto> getPropertyDetail(@PathVariable Long id) {
+        return ResponseEntity.ok(propertyService.getPropertyDetail(id));
     }
 
 }

@@ -1,7 +1,7 @@
 package com.service.hotel_booking.controllers;
 
 import com.service.hotel_booking.entities.request.CreateAmenityDtoRequest;
-import com.service.hotel_booking.entities.response.AmenityResponseDto;
+import com.service.hotel_booking.entities.response.AmenityDto;
 import com.service.hotel_booking.services.AmenityService;
 import com.service.hotel_booking.services.criteria.AmenityCriteria;
 import com.service.hotel_booking.utils.PaginationUtils;
@@ -31,8 +31,8 @@ public class AmenityController {
     AmenityService amenityService;
 
     @GetMapping
-    public ResponseEntity<List<AmenityResponseDto>> getAllAmenities(AmenityCriteria criteria, @ParameterObject @PageableDefault Pageable pageable) {
-        final Page<AmenityResponseDto> page = amenityService.getAllAmenities(criteria, pageable);
+    public ResponseEntity<List<AmenityDto>> getAllAmenities(AmenityCriteria criteria, @ParameterObject @PageableDefault Pageable pageable) {
+        final Page<AmenityDto> page = amenityService.getAllAmenities(criteria, pageable);
         final HttpHeaders headers = PaginationUtils
                 .generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());

@@ -1,7 +1,7 @@
 package com.service.hotel_booking.mappers;
 
 import com.service.hotel_booking.entities.User;
-import com.service.hotel_booking.entities.response.UserDetailResponse;
+import com.service.hotel_booking.entities.response.UserDetailDto;
 import com.service.hotel_booking.entities.response.UserProfileResponse;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -15,8 +15,8 @@ public class UserMapper {
 
     ArgentMapper argentMapper;
 
-    public UserDetailResponse toUserDetail(User user) {
-        return new UserDetailResponse(
+    public UserDetailDto toUserDetail(User user) {
+        return new UserDetailDto(
                 user.getId(),
                 user.getFirstName(),
                 user.getLastName(),
