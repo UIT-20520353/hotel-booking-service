@@ -1,6 +1,6 @@
 package com.service.hotel_booking.controllers;
 
-import com.service.hotel_booking.entities.request.CreateAmenityDtoRequest;
+import com.service.hotel_booking.entities.request.CreateAmenityDto;
 import com.service.hotel_booking.entities.response.AmenityDto;
 import com.service.hotel_booking.services.AmenityService;
 import com.service.hotel_booking.services.criteria.AmenityCriteria;
@@ -39,7 +39,7 @@ public class AmenityController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> createAmenity(@Valid @RequestBody CreateAmenityDtoRequest body) {
+    public ResponseEntity<Void> createAmenity(@Valid @RequestBody CreateAmenityDto body) {
         amenityService.createAmenity(body);
         return ResponseEntity.noContent().build();
     }
@@ -52,7 +52,7 @@ public class AmenityController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<Void> updateAmenity(@PathVariable Long id,
-                                                   @Valid @RequestBody CreateAmenityDtoRequest body) {
+                                              @Valid @RequestBody CreateAmenityDto body) {
         amenityService.updateAmenity(id, body);
         return ResponseEntity.noContent().build();
     }

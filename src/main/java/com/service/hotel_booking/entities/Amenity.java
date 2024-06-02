@@ -1,5 +1,6 @@
 package com.service.hotel_booking.entities;
 
+import com.service.hotel_booking.enumerations.AmenityType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,6 +19,10 @@ public class Amenity {
 
     @Column(name = "name", nullable = false)
     private String name;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type", nullable = false)
+    private AmenityType type;
 
     @Column(name = "is_deleted", nullable = false)
     private Boolean isDeleted;

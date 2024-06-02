@@ -55,9 +55,11 @@ public class MessageConstant {
 
     public static final String ACCOUNT_PENDING_APPROVAL = "error.validate.login.pending-approval";
 
-    public static final String HOTEL_SERVICE_REQUIRED_ERROR = "error.validate.hotel-service.required";
-    public static final String HOTEL_SERVICE_NAME_MAX_LENGTH_ERROR = "error.validate.hotel-service-name.length.max";
-    public static final String HOTEL_SERVICE_NOT_EXIST = "error.hotel-service.not-exist";
+    public static final String AMENITY_REQUIRED_ERROR = "error.validate.amenity.required";
+    public static final String AMENITY_NAME_MAX_LENGTH_ERROR = "error.validate.amenity-name.length.max";
+    public static final String AMENITY_TYPE_INVALID_ERROR = "error.validate.amenity-type.invalid";
+    public static final String AMENITY_TYPE_REQUIRED_ERROR = "error.validate.amenity-type.required";
+    public static final String AMENITY_NOT_EXIST = "error.amenity.not-exist";
 
     //      Property message        //
     public static final String PROPERTY_NOT_EXIST = "error.property.not-exist";

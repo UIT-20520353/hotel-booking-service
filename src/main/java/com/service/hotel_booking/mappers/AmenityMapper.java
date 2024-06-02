@@ -10,7 +10,8 @@ public class AmenityMapper {
     public AmenityDto toAmenityDto(Amenity amenity) {
         return new AmenityDto(
                 amenity.getId(),
-                amenity.getName()
+                amenity.getName(),
+                amenity.getType()
         );
     }
 

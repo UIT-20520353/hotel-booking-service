@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -22,6 +23,10 @@ public class PropertyMapper {
     AmenityMapper amenityMapper;
 
     public PropertyDetailDto toPropertyDetail(Property property, List<Amenity> amenities) {
+        List<PropertyImageDto> images = property.getImages() == null ?
+                new ArrayList<>() :
+                property.getImages().stream().map(this::toPropertyImageDto).toList();
+
         return new PropertyDetailDto(
                 property.getId(),
                 property.getName(),
@@ -31,7 +36,7 @@ public class PropertyMapper {
                 property.getLatitude(),
                 property.getStatus(),
                 property.getPrice(),
-                property.getImages().stream().map(this::toPropertyImageDto).toList(),
+                images,
                 amenities.stream().map(amenityMapper::toAmenityDto).toList(),
                 provinceMapper.toPropertyProvince(property.getProvince(), property.getDistrict(), property.getWard()),
                 userMapper.toUserProfile(property.getArgent())

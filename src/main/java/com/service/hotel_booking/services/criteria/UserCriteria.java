@@ -21,7 +21,7 @@ public class UserCriteria implements Serializable, Criteria {
     private StringFilter name;
     private StringFilter email;
     private UserRoleFilter role;
-    private  UserStatusFilter status;
+    private UserStatusFilter status;
 
     public UserCriteria(UserCriteria other) {
         this.email = Objects.nonNull(other.email) ? other.email : null;
