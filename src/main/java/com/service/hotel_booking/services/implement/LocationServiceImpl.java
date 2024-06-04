@@ -80,6 +80,12 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
+    public Province getProvinceEntityById(Integer id) {
+        return provinceRepository.findById(id)
+                                 .orElseThrow(() -> new BadRequestException(PROVINCE_NOT_EXIST));
+    }
+
+    @Override
     public List<WardResponse> getWardsByDistrictId(Integer id) {
         return wardRepository.getWardByDistrictId(id).stream().map(wardMapper::toWardResponse).toList();
     }

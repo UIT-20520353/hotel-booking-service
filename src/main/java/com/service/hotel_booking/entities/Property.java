@@ -1,6 +1,7 @@
 package com.service.hotel_booking.entities;
 
 import com.service.hotel_booking.enumerations.PropertyStatus;
+import com.service.hotel_booking.enumerations.PropertyType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -38,8 +39,9 @@ public class Property {
     @Enumerated(EnumType.STRING)
     private PropertyStatus status;
 
-    @Column(name = "price", nullable = false)
-    private Long price;
+    @Column(name = "type", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private PropertyType type;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_ward_id", referencedColumnName = "id", nullable = false)
@@ -65,5 +67,8 @@ public class Property {
 
     @OneToMany(mappedBy = "property", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<PropertyImage> images;
+
+    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Room> rooms;
 
 }

@@ -1,5 +1,6 @@
 package com.service.hotel_booking.services;
 
+import com.service.hotel_booking.entities.User;
 import com.service.hotel_booking.entities.request.UpdateUserStatusRequest;
 import com.service.hotel_booking.entities.response.UserDetailDto;
 import com.service.hotel_booking.entities.response.UserProfileResponse;
@@ -13,5 +14,6 @@ public interface UserService {
     UserProfileResponse getUserProfile(Long id);
     UserDetailDto getUserDetail(Long id);
     void updateUserStatus(Long id, UpdateUserStatusRequest status);
+    User getUserById(Long id);
 
 }

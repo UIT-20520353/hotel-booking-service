@@ -1,5 +1,6 @@
 package com.service.hotel_booking.services;
 
+import com.service.hotel_booking.entities.Province;
 import com.service.hotel_booking.entities.response.DetailProvinceResponse;
 import com.service.hotel_booking.entities.response.DistrictResponse;
 import com.service.hotel_booking.entities.response.SimpleProvinceResponse;
@@ -16,5 +17,6 @@ public interface LocationService {
     List<SimpleProvinceResponse> getSimpleProvinces();
     DetailProvinceResponse getProvinceById(Integer id);
     List<DetailProvinceResponse> getAllProvinces();
+    Province getProvinceEntityById(Integer id);
 
 }

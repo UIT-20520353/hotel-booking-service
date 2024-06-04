@@ -40,7 +40,7 @@ public class UserServiceImpl extends QueryService<User> implements UserService {
     }
 
     private Specification<User> createSpecification(UserCriteria criteria) {
-        Specification<User> specification = Specification.where(null);
+            Specification<User> specification = Specification.where(null);
         if (criteria != null) {
             if (Objects.nonNull(criteria.getEmail())) {
                 specification = specification.and(buildSpecification(criteria.getEmail(),
@@ -102,6 +102,12 @@ public class UserServiceImpl extends QueryService<User> implements UserService {
             case BLOCKED -> throw new BadRequestException(ARGENT_ALREADY_BLOCKED);
             default -> user.setStatus(body.getStatus());
         }
+    }
+
+    @Override
+    public User getUserById(Long id) {
+        return userRepository.findById(id)
+                             .orElseThrow(() -> new BadRequestException(USER_NOT_EXIST));
     }
 
 }

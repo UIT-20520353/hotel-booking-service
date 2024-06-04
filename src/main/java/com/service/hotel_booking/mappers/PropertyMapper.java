@@ -1,10 +1,12 @@
 package com.service.hotel_booking.mappers;
 
-import com.service.hotel_booking.entities.Amenity;
 import com.service.hotel_booking.entities.Property;
+import com.service.hotel_booking.entities.PropertyAmenity;
 import com.service.hotel_booking.entities.PropertyImage;
+import com.service.hotel_booking.entities.response.AmenityDto;
 import com.service.hotel_booking.entities.response.PropertyDetailDto;
 import com.service.hotel_booking.entities.response.PropertyImageDto;
+import com.service.hotel_booking.entities.response.RoomDto;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -21,11 +24,21 @@ public class PropertyMapper {
     UserMapper userMapper;
     ProvinceMapper provinceMapper;
     AmenityMapper amenityMapper;
+    RoomMapper roomMapper;
 
-    public PropertyDetailDto toPropertyDetail(Property property, List<Amenity> amenities) {
+    public PropertyDetailDto toPropertyDetail(Property property) {
         List<PropertyImageDto> images = property.getImages() == null ?
                 new ArrayList<>() :
                 property.getImages().stream().map(this::toPropertyImageDto).toList();
+        List<RoomDto> rooms = property.getRooms() == null ?
+                new ArrayList<>() :
+                property.getRooms().stream().map(roomMapper::toRoomDto).toList();
+        List<AmenityDto> amenities = property.getAmenities() == null ?
+                new ArrayList<>() :
+                property.getAmenities().stream()
+                        .map(PropertyAmenity::getAmenity)
+                        .map(amenityMapper::toAmenityDto)
+                        .collect(Collectors.toList());
 
         return new PropertyDetailDto(
                 property.getId(),
@@ -35,11 +48,11 @@ public class PropertyMapper {
                 property.getLongitude(),
                 property.getLatitude(),
                 property.getStatus(),
-                property.getPrice(),
                 images,
-                amenities.stream().map(amenityMapper::toAmenityDto).toList(),
+                amenities,
                 provinceMapper.toPropertyProvince(property.getProvince(), property.getDistrict(), property.getWard()),
-                userMapper.toUserProfile(property.getArgent())
+                userMapper.toUserProfile(property.getArgent()),
+                rooms
         );
     }
 

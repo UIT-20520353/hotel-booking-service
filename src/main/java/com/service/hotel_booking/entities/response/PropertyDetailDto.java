@@ -12,10 +12,10 @@ public record PropertyDetailDto(
         double longitude,
         double latitude,
         PropertyStatus status,
-        Long price,
         List<PropertyImageDto> images,
         List<AmenityDto> amenities,
         PropertyProvinceDto province,
-        UserProfileResponse argent
+        UserProfileResponse argent,
+        List<RoomDto> rooms
 ) {
 }
