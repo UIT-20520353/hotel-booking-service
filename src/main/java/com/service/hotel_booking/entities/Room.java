@@ -4,6 +4,8 @@ import com.service.hotel_booking.enumerations.RoomStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "t_rooms")
 @Getter
@@ -30,5 +32,8 @@ public class Room {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_property_id", referencedColumnName = "id", nullable = false)
     private Property property;
+
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<RoomImage> images;
 
 }
