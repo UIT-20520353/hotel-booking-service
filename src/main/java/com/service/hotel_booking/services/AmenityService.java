@@ -1,5 +1,6 @@
 package com.service.hotel_booking.services;
 
+import com.service.hotel_booking.entities.Amenity;
 import com.service.hotel_booking.entities.request.CreateAmenityDto;
 import com.service.hotel_booking.entities.response.AmenityDto;
 import com.service.hotel_booking.services.criteria.AmenityCriteria;
@@ -12,5 +13,6 @@ public interface AmenityService {
     void createAmenity(CreateAmenityDto body);
     void deleteAmenity(Long id);
     void updateAmenity(Long id, CreateAmenityDto body);
+    Amenity getAmenityEntityById(Long id);
 
 }

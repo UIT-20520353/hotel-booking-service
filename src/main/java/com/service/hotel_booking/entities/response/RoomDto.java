@@ -8,6 +8,7 @@ public record RoomDto(Long id,
                       String name,
                       Long price,
                       RoomStatus status,
-                      List<RoomImageDto> images
+                      List<RoomImageDto> images,
+                      List<AmenityWithoutTypeDto> amenities
 ) {
 }

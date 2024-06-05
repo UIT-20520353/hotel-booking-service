@@ -13,7 +13,7 @@ public record PropertyDetailDto(
         double latitude,
         PropertyStatus status,
         List<PropertyImageDto> images,
-        List<AmenityDto> amenities,
+        List<AmenityWithoutTypeDto> amenities,
         PropertyProvinceDto province,
         UserProfileResponse argent,
         List<RoomDto> rooms

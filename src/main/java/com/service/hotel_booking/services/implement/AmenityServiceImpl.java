@@ -59,23 +59,25 @@ public class AmenityServiceImpl extends QueryService<Amenity> implements Amenity
     @Override
     @Transactional
     public void deleteAmenity(Long id) {
-        Amenity amenity = amenityRepository
-                                        .findById(id)
-                                        .orElseThrow(() -> new BadRequestException(AMENITY_NOT_EXIST));
-
+        Amenity amenity = this.getAmenityEntityById(id);
         amenity.setIsDeleted(true);
     }
 
     @Override
     @Transactional
     public void updateAmenity(Long id, CreateAmenityDto body) {
-        Amenity amenity = amenityRepository
-                .findById(id)
-                .orElseThrow(() -> new BadRequestException(AMENITY_NOT_EXIST));
-
+        Amenity amenity = this.getAmenityEntityById(id);;
         amenity.setName(body.getName());
         amenity.setType(body.getType());
     }
+
+    @Override
+    public Amenity getAmenityEntityById(Long id) {
+        return amenityRepository
+                .findById(id)
+                .orElseThrow(() -> new BadRequestException(AMENITY_NOT_EXIST));
+    }
+
 
     private Specification<Amenity> createSpecification(AmenityCriteria criteria) {
         Specification<Amenity> specification = Specification.where(null);

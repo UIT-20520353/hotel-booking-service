@@ -3,6 +3,7 @@ package com.service.hotel_booking.services.implement;
 import com.service.hotel_booking.entities.*;
 import com.service.hotel_booking.entities.request.PropertyRequestDto;
 import com.service.hotel_booking.entities.response.PropertyDetailDto;
+import com.service.hotel_booking.enumerations.PropertyStatus;
 import com.service.hotel_booking.exceptions.BadRequestException;
 import com.service.hotel_booking.mappers.PropertyMapper;
 import com.service.hotel_booking.repositories.DistrictRepository;
@@ -48,18 +49,20 @@ public class PropertyServiceImpl extends QueryService<Property> implements Prope
         Ward ward = wardRepository.findByDistrictIdAndId(district.getId(), body.getWardId())
                                   .orElseThrow(() -> new BadRequestException(WARD_NOT_IN_DISTRICT_ERROR));
 
-//        propertyRepository.save(Property
-//                                    .builder()
-//                                    .name(body.getName())
-//                                    .address(body.getAddress())
-//                                    .description(body.getDescription())
-//                                    .price(body.getPrice())
-//                                    .province(province)
-//                                    .district(district)
-//                                    .ward(ward)
-//                                    .argent(user)
-//                                    .status(PropertyStatus.AVAILABLE)
-//                                    .build());
+        propertyRepository.save(Property
+                                    .builder()
+                                    .name(body.getName())
+                                    .address(body.getAddress())
+                                    .description(body.getDescription())
+                                    .latitude(body.getLatitude())
+                                    .longitude(body.getLongitude())
+                                    .province(province)
+                                    .district(district)
+                                    .ward(ward)
+                                    .argent(user)
+                                    .status(PropertyStatus.AVAILABLE)
+                                    .type(body.getType())
+                                    .build());
 
     }
 
@@ -83,6 +86,10 @@ public class PropertyServiceImpl extends QueryService<Property> implements Prope
         if (criteria != null) {
             if (Objects.nonNull(criteria.getName())) {
                 specification = specification.and(buildSpecification(criteria.getName(), root -> root.get(Property_.name)));
+            }
+
+            if (Objects.nonNull(criteria.getStatus())) {
+                specification = specification.and(buildSpecification(criteria.getStatus(), Property_.status));
             }
         }
 

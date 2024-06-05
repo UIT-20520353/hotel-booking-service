@@ -39,19 +39,13 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public WardResponse getWardById(Integer id) {
-        Ward ward = wardRepository
-                .findById(id)
-                .orElseThrow(() -> new BadRequestException(WARD_NOT_EXIST));
-
+        Ward ward = this.getWardEntityById(id);
         return wardMapper.toWardResponse(ward);
     }
 
     @Override
     public DistrictResponse getDistrictById(Integer id) {
-        District district = districtRepository
-                .findById(id)
-                .orElseThrow(() -> new BadRequestException(DISTRICT_NOT_EXIST));
-
+        District district = this.getDistrictEntityById(id);
         return districtMapper.toDistrictResponse(district);
     }
 
@@ -67,10 +61,7 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public DetailProvinceResponse getProvinceById(Integer id) {
-        Province province = provinceRepository
-                .findById(id)
-                .orElseThrow(() -> new BadRequestException(PROVINCE_NOT_EXIST));
-
+        Province province = this.getProvinceEntityById(id);
         return provinceMapper.toDetailProvince(province);
     }
 
@@ -80,14 +71,28 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
+    public List<WardResponse> getWardsByDistrictId(Integer id) {
+        return wardRepository.getWardByDistrictId(id).stream().map(wardMapper::toWardResponse).toList();
+    }
+
+    @Override
     public Province getProvinceEntityById(Integer id) {
         return provinceRepository.findById(id)
                                  .orElseThrow(() -> new BadRequestException(PROVINCE_NOT_EXIST));
     }
 
     @Override
-    public List<WardResponse> getWardsByDistrictId(Integer id) {
-        return wardRepository.getWardByDistrictId(id).stream().map(wardMapper::toWardResponse).toList();
+    public Ward getWardEntityById(Integer id) {
+        return wardRepository
+                .findById(id)
+                .orElseThrow(() -> new BadRequestException(WARD_NOT_EXIST));
+    }
+
+    @Override
+    public District getDistrictEntityById(Integer id) {
+        return districtRepository
+                .findById(id)
+                .orElseThrow(() -> new BadRequestException(DISTRICT_NOT_EXIST));
     }
 
 }

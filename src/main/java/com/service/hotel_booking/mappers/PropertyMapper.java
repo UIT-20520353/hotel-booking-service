@@ -3,10 +3,7 @@ package com.service.hotel_booking.mappers;
 import com.service.hotel_booking.entities.Property;
 import com.service.hotel_booking.entities.PropertyAmenity;
 import com.service.hotel_booking.entities.PropertyImage;
-import com.service.hotel_booking.entities.response.AmenityDto;
-import com.service.hotel_booking.entities.response.PropertyDetailDto;
-import com.service.hotel_booking.entities.response.PropertyImageDto;
-import com.service.hotel_booking.entities.response.RoomDto;
+import com.service.hotel_booking.entities.response.*;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -33,11 +30,11 @@ public class PropertyMapper {
         List<RoomDto> rooms = property.getRooms() == null ?
                 new ArrayList<>() :
                 property.getRooms().stream().map(roomMapper::toRoomDto).toList();
-        List<AmenityDto> amenities = property.getAmenities() == null ?
+        List<AmenityWithoutTypeDto> amenities = property.getAmenities() == null ?
                 new ArrayList<>() :
                 property.getAmenities().stream()
                         .map(PropertyAmenity::getAmenity)
-                        .map(amenityMapper::toAmenityDto)
+                        .map(amenityMapper::toAmenityWithoutTypeDto)
                         .collect(Collectors.toList());
 
         return new PropertyDetailDto(

@@ -1,6 +1,7 @@
 package com.service.hotel_booking.entities.request;
 
 import com.service.hotel_booking.entities.validate.EachInteger;
+import com.service.hotel_booking.enumerations.PropertyType;
 import jakarta.persistence.ElementCollection;
 import jakarta.validation.constraints.*;
 import lombok.Data;
@@ -52,12 +53,15 @@ public class PropertyRequestDto {
     @NotNull(message = PROPERTY_ARGENT_ID_REQUIRED_ERROR)
     private Long argentId;
 
-    @NotNull(message = PROPERTY_PRICE_REQUIRED_ERROR)
-    @Digits(integer = 11, fraction = 0, message = PROPERTY_PRICE_INTEGER_ERROR)
-    private Long price;
+//    @NotNull(message = PROPERTY_PRICE_REQUIRED_ERROR)
+//    @Digits(integer = 11, fraction = 0, message = PROPERTY_PRICE_INTEGER_ERROR)
+//    private Long price;
 
     @ElementCollection
     @EachInteger(message = PROPERTY_AMENITY_ID_INTEGER_ERROR)
     private List<Integer> amenityIds;
+
+    @NotNull(message = PROPERTY_TYPE_REQUIRED_ERROR)
+    private PropertyType type;
 
 }
