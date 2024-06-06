@@ -22,6 +22,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 
 import static com.service.hotel_booking.constant.MessageConstant.AMENITY_NOT_EXIST;
@@ -76,6 +77,12 @@ public class AmenityServiceImpl extends QueryService<Amenity> implements Amenity
         return amenityRepository
                 .findById(id)
                 .orElseThrow(() -> new BadRequestException(AMENITY_NOT_EXIST));
+    }
+
+    @Override
+    public List<Amenity> getListAmenityEntity(AmenityCriteria criteria) {
+        Specification<Amenity> specification = createSpecification(criteria);
+        return amenityRepository.findAll(specification);
     }
 
 

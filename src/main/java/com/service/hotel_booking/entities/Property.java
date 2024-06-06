@@ -35,6 +35,9 @@ public class Property {
     @Column(name = "latitude")
     private double latitude;
 
+    @Column(name = "deposit")
+    private boolean deposit;
+
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
     private PropertyStatus status;

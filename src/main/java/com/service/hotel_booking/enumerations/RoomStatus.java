@@ -4,6 +4,7 @@ public enum RoomStatus {
     AVAILABLE("AVAILABLE"),
     BOOKED("BOOKED"),
     UNDER_MAINTENANCE("UNDER_MAINTENANCE"),
+    DELETED("DELETED"),
     CLEANING("CLEANING");
 
     public final String value;

@@ -35,4 +35,16 @@ public class ResourceServiceImpl implements ResourceService {
         });
     }
 
+    @Override
+    public String uploadPropertyImage(byte[] bytes, String contentType) {
+        String key = "property-image" + "-" + UUID.randomUUID() + ".png";
+        return s3Service.uploadFile(key, "hotel-booking-storage-30-04-2024", bytes, List.of("image", "property"), contentType);
+    }
+
+    @Override
+    public String uploadRoomImage(byte[] bytes, String contentType) {
+        String key = "room-image" + "-" + UUID.randomUUID() + ".png";
+        return s3Service.uploadFile(key, "hotel-booking-storage-30-04-2024", bytes, List.of("image", "room"), contentType);
+    }
+
 }

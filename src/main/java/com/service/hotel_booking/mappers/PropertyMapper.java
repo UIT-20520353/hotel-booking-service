@@ -3,7 +3,11 @@ package com.service.hotel_booking.mappers;
 import com.service.hotel_booking.entities.Property;
 import com.service.hotel_booking.entities.PropertyAmenity;
 import com.service.hotel_booking.entities.PropertyImage;
-import com.service.hotel_booking.entities.response.*;
+import com.service.hotel_booking.entities.response.AmenityWithoutTypeDto;
+import com.service.hotel_booking.entities.response.PropertyDetailDto;
+import com.service.hotel_booking.entities.response.PropertyImageDto;
+import com.service.hotel_booking.entities.response.RoomDto;
+import com.service.hotel_booking.enumerations.RoomStatus;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -29,7 +33,9 @@ public class PropertyMapper {
                 property.getImages().stream().map(this::toPropertyImageDto).toList();
         List<RoomDto> rooms = property.getRooms() == null ?
                 new ArrayList<>() :
-                property.getRooms().stream().map(roomMapper::toRoomDto).toList();
+                property.getRooms().stream()
+                        .filter(room -> !room.getStatus().equals(RoomStatus.DELETED))
+                        .map(roomMapper::toRoomDto).toList();
         List<AmenityWithoutTypeDto> amenities = property.getAmenities() == null ?
                 new ArrayList<>() :
                 property.getAmenities().stream()
@@ -44,6 +50,7 @@ public class PropertyMapper {
                 property.getAddress(),
                 property.getLongitude(),
                 property.getLatitude(),
+                property.isDeposit(),
                 property.getStatus(),
                 images,
                 amenities,

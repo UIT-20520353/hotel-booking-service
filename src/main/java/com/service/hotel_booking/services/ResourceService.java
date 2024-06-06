@@ -8,5 +8,7 @@ public interface ResourceService {
 
     String uploadImage(MultipartFile image);
     void checkValidImgList(List<MultipartFile> imgList);
+    String uploadPropertyImage(byte[] bytes, String contentType);
+    String uploadRoomImage(byte[] bytes, String contentType);
 
 }

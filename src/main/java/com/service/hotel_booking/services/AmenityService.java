@@ -7,6 +7,8 @@ import com.service.hotel_booking.services.criteria.AmenityCriteria;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 public interface AmenityService {
 
     Page<AmenityDto> getAllAmenities(AmenityCriteria criteria, Pageable pageable);
@@ -14,5 +16,6 @@ public interface AmenityService {
     void deleteAmenity(Long id);
     void updateAmenity(Long id, CreateAmenityDto body);
     Amenity getAmenityEntityById(Long id);
+    List<Amenity> getListAmenityEntity(AmenityCriteria criteria);
 
 }

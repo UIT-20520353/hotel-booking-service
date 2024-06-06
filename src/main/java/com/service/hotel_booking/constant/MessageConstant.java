@@ -64,6 +64,7 @@ public class MessageConstant {
     //      Property message        //
     public static final String PROPERTY_NOT_EXIST = "error.property.not-exist";
     public static final String PROPERTY_NAME_REQUIRED_ERROR = "error.validate.property-name.required";
+    public static final String PROPERTY_DEPOSIT_REQUIRED_ERROR = "error.validate.property-deposit.required";
     public static final String PROPERTY_NAME_MAX_LENGTH_ERROR = "error.validate.property-name.length.max";
     public static final String PROPERTY_DESCRIPTION_REQUIRED_ERROR = "error.validate.property-description.required";
     public static final String PROPERTY_ADDRESS_REQUIRED_ERROR = "error.validate.property-address.required";
@@ -90,5 +91,16 @@ public class MessageConstant {
     public static final String PROPERTY_AMENITY_ID_INTEGER_ERROR = "error.validate.property-amenity-id.integer";
     public static final String DISTRICT_NOT_IN_PROVINCE_ERROR = "error.validate.district-not-in-province";
     public static final String WARD_NOT_IN_DISTRICT_ERROR = "error.validate.ward-not-in-district";
+    public static final String USER_NOT_ALLOWED_TO_CREATE_PROPERTY = "error.validate.user.not-allowed-to-create-property";
+    public static final String PROPERTY_NOT_AVAILABLE = "error.validate.property.not-available";
+
+    //      Room message        //
+    public static final String ROOM_NOT_EXIST = "error.room.not-exist";
+    public static final String ROOM_NAME_REQUIRED_ERROR = "error.validate.property-name.required";
+    public static final String ROOM_NAME_MAX_LENGTH_ERROR = "error.validate.property-name.length.max";
+    public static final String ROOM_PRICE_REQUIRED_ERROR = "error.validate.room-price.required";
+    public static final String ROOM_PRICE_INTEGER_ERROR = "error.validate.room-price.integer";
+    public static final String ROOM_PROPERTY_ID_REQUIRED_ERROR = "error.validate.room-property-id.required";
+    public static final String ROOM_IMAGE_LIST_REQUIRED_ERROR = "error.validate.room-img-list.required";
 
 }

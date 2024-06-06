@@ -71,6 +71,9 @@ public class SecurityConfiguration {
                         .requestMatchers(new AntPathRequestMatcher("/api/amenities/**")).hasAuthority("ADMIN")
                         .requestMatchers(new AntPathRequestMatcher("/api/properties/**", "GET")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/api/properties", "POST")).hasAuthority("ARGENT")
+                        .requestMatchers(new AntPathRequestMatcher("/api/rooms/**", "GET")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/api/rooms/**", "DELETE")).hasAuthority("ARGENT")
+                        .requestMatchers(new AntPathRequestMatcher("/api/rooms", "POST")).hasAuthority("ARGENT")
 
                         .anyRequest().authenticated()
                 )

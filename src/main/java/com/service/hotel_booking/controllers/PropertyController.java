@@ -28,7 +28,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PropertyController {
 
-    PropertyService propertyService;
+PropertyService propertyService;
 
     @GetMapping
     public ResponseEntity<List<PropertyDetailDto>> getPropertyList(PropertyCriteria criteria,
@@ -40,7 +40,7 @@ public class PropertyController {
     }
 
     @PostMapping(consumes = { "multipart/form-data" })
-    public ResponseEntity<Void> createProperty(@ModelAttribute @Valid PropertyRequestDto body) {
+    public ResponseEntity<PropertyDetailDto> createProperty(@ModelAttribute @Valid PropertyRequestDto body) {
         propertyService.createProperty(body);
         return ResponseEntity.noContent().build();
     }
@@ -48,6 +48,12 @@ public class PropertyController {
     @GetMapping("/{id}")
     public ResponseEntity<PropertyDetailDto> getPropertyDetail(@PathVariable Long id) {
         return ResponseEntity.ok(propertyService.getPropertyDetail(id));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteProperty(@PathVariable Long id) {
+        propertyService.deleteProperty(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
