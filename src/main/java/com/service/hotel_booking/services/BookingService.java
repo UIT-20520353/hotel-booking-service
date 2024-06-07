@@ -4,6 +4,6 @@ import com.service.hotel_booking.entities.request.CreateBookingDto;
 
 public interface BookingService {
 
-    void createBooking(Long userId, CreateBookingDto body);
+    Long createBooking(Long userId, CreateBookingDto body);
 
 }

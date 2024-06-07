@@ -24,9 +24,8 @@ public class BookingController {
     BookingService bookingService;
 
     @PostMapping
-    public ResponseEntity<Void> createBooking(@RequestBody @Valid CreateBookingDto body) {
-        bookingService.createBooking(SecurityUtils.getCurrentUserId(), body);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<Long> createBooking(@RequestBody @Valid CreateBookingDto body) {
+        return ResponseEntity.ok(bookingService.createBooking(SecurityUtils.getCurrentUserId(), body));
     }
 
 }

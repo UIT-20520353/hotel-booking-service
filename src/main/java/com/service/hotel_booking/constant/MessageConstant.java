@@ -61,6 +61,8 @@ public class MessageConstant {
     public static final String AMENITY_TYPE_REQUIRED_ERROR = "error.validate.amenity-type.required";
     public static final String AMENITY_NOT_EXIST = "error.amenity.not-exist";
 
+    public static final String ROOM_IDS_REQUIRED_ERROR = "error.validate.room-ids.required";
+
     //      Property message        //
     public static final String PROPERTY_NOT_EXIST = "error.property.not-exist";
     public static final String PROPERTY_NAME_REQUIRED_ERROR = "error.validate.property-name.required";
@@ -93,6 +95,7 @@ public class MessageConstant {
     public static final String WARD_NOT_IN_DISTRICT_ERROR = "error.validate.ward-not-in-district";
     public static final String USER_NOT_ALLOWED_TO_CREATE_PROPERTY = "error.validate.user.not-allowed-to-create-property";
     public static final String PROPERTY_NOT_AVAILABLE = "error.validate.property.not-available";
+    public static final String PROPERTY_NOT_HAVE_ROOM = "error.validate.property.not-have-room";
 
     //      Room message        //
     public static final String ROOM_NOT_EXIST = "error.room.not-exist";
@@ -102,5 +105,10 @@ public class MessageConstant {
     public static final String ROOM_PRICE_INTEGER_ERROR = "error.validate.room-price.integer";
     public static final String ROOM_PROPERTY_ID_REQUIRED_ERROR = "error.validate.room-property-id.required";
     public static final String ROOM_IMAGE_LIST_REQUIRED_ERROR = "error.validate.room-img-list.required";
+
+    //      Booking message        //
+    public static final String BOOKING_START_DATE_REQUIRED_ERROR = "error.validate.booking.start-date.required";
+    public static final String BOOKING_END_DATE_REQUIRED_ERROR = "error.validate.booking.end-date.required";
+    public static final String BOOKING_PROPERTY_ID_REQUIRED_ERROR = "error.validate.booking.property-id.required";
 
 }
