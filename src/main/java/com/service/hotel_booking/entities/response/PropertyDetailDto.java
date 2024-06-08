@@ -11,7 +11,7 @@ public record PropertyDetailDto(
         String address,
         double longitude,
         double latitude,
-        boolean deposit,
+        Integer depositPercent,
         PropertyStatus status,
         List<PropertyImageDto> images,
         List<AmenityWithoutTypeDto> amenities,

@@ -3,10 +3,12 @@ package com.service.hotel_booking.mappers;
 import com.service.hotel_booking.entities.Property;
 import com.service.hotel_booking.entities.PropertyAmenity;
 import com.service.hotel_booking.entities.PropertyImage;
+import com.service.hotel_booking.entities.Room;
 import com.service.hotel_booking.entities.response.AmenityWithoutTypeDto;
 import com.service.hotel_booking.entities.response.PropertyDetailDto;
 import com.service.hotel_booking.entities.response.PropertyImageDto;
 import com.service.hotel_booking.entities.response.RoomDto;
+import com.service.hotel_booking.entities.response.booking.BookingPropertyDto;
 import com.service.hotel_booking.enumerations.RoomStatus;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -50,13 +52,32 @@ public class PropertyMapper {
                 property.getAddress(),
                 property.getLongitude(),
                 property.getLatitude(),
-                property.isDeposit(),
+                property.getDepositPercent(),
                 property.getStatus(),
                 images,
                 amenities,
                 provinceMapper.toPropertyProvince(property.getProvince(), property.getDistrict(), property.getWard()),
                 userMapper.toUserProfile(property.getArgent()),
                 rooms
+        );
+    }
+
+    public BookingPropertyDto toBookingPropertyDto(Property property, List<Room> rooms) {
+        List<PropertyImageDto> images = property.getImages() == null ?
+                new ArrayList<>() :
+                property.getImages().stream().map(this::toPropertyImageDto).toList();
+
+        return new BookingPropertyDto(
+                property.getId(),
+                property.getName(),
+                property.getAddress(),
+                property.getDescription(),
+                provinceMapper.toPropertyProvince(property.getProvince(), property.getDistrict(), property.getWard()),
+                property.getLongitude(),
+                property.getLatitude(),
+                images,
+                property.getType(),
+                rooms.stream().map(roomMapper::toRoomDto).toList()
         );
     }
 

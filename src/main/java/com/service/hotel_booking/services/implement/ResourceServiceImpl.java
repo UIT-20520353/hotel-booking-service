@@ -47,4 +47,11 @@ public class ResourceServiceImpl implements ResourceService {
         return s3Service.uploadFile(key, "hotel-booking-storage-30-04-2024", bytes, List.of("image", "room"), contentType);
     }
 
+    @Override
+    public String uploadBankQr(MultipartFile qrCode) {
+        byte[] bytes = FileUtils.checkFile(qrCode);
+        String key = "bank-qr-" + UUID.randomUUID() + ".png";
+        return s3Service.uploadFile(key, "hotel-booking-storage-30-04-2024", bytes, List.of("image", "bank"), qrCode.getContentType());
+    }
+
 }

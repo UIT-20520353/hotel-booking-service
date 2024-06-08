@@ -107,8 +107,16 @@ public class MessageConstant {
     public static final String ROOM_IMAGE_LIST_REQUIRED_ERROR = "error.validate.room-img-list.required";
 
     //      Booking message        //
+    public static final String BOOKING_NOT_EXIST = "error.booking.not-exist";
     public static final String BOOKING_START_DATE_REQUIRED_ERROR = "error.validate.booking.start-date.required";
     public static final String BOOKING_END_DATE_REQUIRED_ERROR = "error.validate.booking.end-date.required";
     public static final String BOOKING_PROPERTY_ID_REQUIRED_ERROR = "error.validate.booking.property-id.required";
+
+    //     Bank message        //
+    public static final String BANK_NOT_FOUND = "error.bank.not-found";
+    public static final String BANK_NAME_REQUIRED_ERROR = "error.validate.bank-name.required";
+    public static final String ACCOUNT_NUMBER_REQUIRED_ERROR = "error.validate.bank-number.required";
+    public static final String BANK_QR_CODE_REQUIRED_ERROR = "error.validate.bank-qr.required";
+    public static final String ACCOUNT_NAME_REQUIRED_ERROR = "error.validate.bank-account-name.required";
 
 }

@@ -80,7 +80,7 @@ public class PropertyServiceImpl extends QueryService<Property> implements Prope
                 .argent(user)
                 .status(PropertyStatus.AVAILABLE)
                 .type(body.getType())
-                .deposit(body.isDeposit())
+                .depositPercent(body.getDepositPercent())
                 .build();
         propertyRepository.save(property);
 

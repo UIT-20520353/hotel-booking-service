@@ -126,7 +126,9 @@ public class RoomServiceImpl extends QueryService<Room> implements RoomService {
         roomIds.forEach(roomId -> {
             Room room = roomRepository.findAllByPropertyIdAndId(propertyId, roomId)
                     .orElseThrow(() -> new BadRequestException(PROPERTY_NOT_HAVE_ROOM));
-            rooms.add(room);
+            if (room.getStatus().equals(RoomStatus.AVAILABLE)) {
+                rooms.add(room);
+            }
         });
         return rooms;
     }
