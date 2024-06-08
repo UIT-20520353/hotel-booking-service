@@ -3,6 +3,7 @@ package com.service.hotel_booking.services.criteria;
 import com.service.hotel_booking.enumerations.RoomStatus;
 import com.service.hotel_booking.services.query.Criteria;
 import com.service.hotel_booking.services.query.filter.Filter;
+import com.service.hotel_booking.services.query.filter.LongFilter;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,9 +19,11 @@ import java.io.Serializable;
 public class RoomCriteria implements Serializable, Criteria {
 
     private RoomStatusFilter status;
+    private LongFilter propertyId;
 
     public RoomCriteria(RoomCriteria other) {
         this.status = other.status != null ? other.status : null;
+        this.propertyId = other.propertyId != null ? other.propertyId : null;
     }
 
     @Override

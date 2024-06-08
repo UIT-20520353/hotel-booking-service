@@ -16,7 +16,7 @@ public class Argent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(name = "identity_number")
     private String identityNumber;
@@ -33,5 +33,8 @@ public class Argent {
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_user_id", referencedColumnName = "id", nullable = false)
     private User user;
+
+    @OneToMany(mappedBy = "argent", fetch = FetchType.LAZY)
+    private List<Bank> banks;
 
 }

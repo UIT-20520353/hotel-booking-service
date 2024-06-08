@@ -59,6 +59,6 @@ public class PropertyRequestDto {
     private Long price;
 
     @NotNull(message = PROPERTY_DEPOSIT_REQUIRED_ERROR)
-    private boolean deposit;
+    private Integer depositPercent;
 
 }

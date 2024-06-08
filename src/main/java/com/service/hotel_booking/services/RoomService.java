@@ -12,5 +12,7 @@ public interface RoomService {
     List<RoomDto> getAllRooms(Long propertyId);
     void deleteRoom(Long roomId);
     Room getRoomEntityById(Long roomId);
+    List<Room> getRoomEntitiesByIds(List<Long> roomIds);
+    List<Room> getRoomEntitiesByIdsAndPropertyId(Long propertyId, List<Long> roomIds);
 
 }

@@ -1,10 +1,7 @@
 package com.service.hotel_booking.services.implement;
 
 
-import com.service.hotel_booking.entities.Amenity;
-import com.service.hotel_booking.entities.Property;
-import com.service.hotel_booking.entities.Room;
-import com.service.hotel_booking.entities.Room_;
+import com.service.hotel_booking.entities.*;
 import com.service.hotel_booking.entities.request.CreateRoomDto;
 import com.service.hotel_booking.entities.response.RoomDto;
 import com.service.hotel_booking.enumerations.AmenityType;
@@ -30,6 +27,7 @@ import org.antlr.v4.runtime.misc.Pair;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -93,8 +91,10 @@ public class RoomServiceImpl extends QueryService<Room> implements RoomService {
     public List<RoomDto> getAllRooms(Long propertyId) {
         RoomCriteria criteria = RoomCriteria.builder()
                                             .status(RoomStatusFilterBuilder.builder().notEquals(RoomStatus.DELETED).build())
+                                            .propertyId(LongFilterBuilder.builder().equals(propertyId).build())
                                             .build();
-        return roomRepository.findAllByPropertyId(propertyId).stream().map(roomMapper::toRoomDto).toList();
+        Specification<Room> specification = createSpecification(criteria);
+        return roomRepository.findAll(specification).stream().map(roomMapper::toRoomDto).toList();
     }
 
     @Override
@@ -109,12 +109,41 @@ public class RoomServiceImpl extends QueryService<Room> implements RoomService {
         return roomRepository.findById(roomId).orElseThrow(() -> new BadRequestException(ROOM_NOT_EXIST));
     }
 
+    @Override
+    public List<Room> getRoomEntitiesByIds(List<Long> roomIds) {
+        List<Room> rooms = new ArrayList<>();
+        roomIds.forEach(roomId -> {
+            Room room = roomRepository.findById(roomId)
+                    .orElseThrow(() -> new BadRequestException(ROOM_NOT_EXIST));
+            rooms.add(room);
+        });
+        return rooms;
+    }
+
+    @Override
+    public List<Room> getRoomEntitiesByIdsAndPropertyId(Long propertyId, List<Long> roomIds) {
+        List<Room> rooms = new ArrayList<>();
+        roomIds.forEach(roomId -> {
+            Room room = roomRepository.findAllByPropertyIdAndId(propertyId, roomId)
+                    .orElseThrow(() -> new BadRequestException(PROPERTY_NOT_HAVE_ROOM));
+            if (room.getStatus().equals(RoomStatus.AVAILABLE)) {
+                rooms.add(room);
+            }
+        });
+        return rooms;
+    }
+
     private Specification<Room> createSpecification(RoomCriteria criteria) {
         Specification<Room> specification = Specification.where(null);
 
         if (criteria != null) {
             if (Objects.nonNull(criteria.getStatus())) {
                 specification = specification.and(buildSpecification(criteria.getStatus(), Room_.status));
+            }
+
+            if (Objects.nonNull(criteria.getPropertyId())) {
+                specification = specification.and(buildSpecification(criteria.getPropertyId(),
+                        root -> root.get(Room_.property).get(Property_.id)));
             }
         }
 

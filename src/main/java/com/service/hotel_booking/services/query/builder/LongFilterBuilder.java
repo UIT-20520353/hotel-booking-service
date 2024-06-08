@@ -21,6 +21,11 @@ public class LongFilterBuilder {
         return this;
     }
 
+    public LongFilterBuilder equals(Long value) {
+        this.filter.setEquals(value);
+        return this;
+    }
+
     public LongFilter build() {
         return this.filter;
     }
