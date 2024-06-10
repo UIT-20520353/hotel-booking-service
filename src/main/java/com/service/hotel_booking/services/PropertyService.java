@@ -14,5 +14,6 @@ public interface PropertyService {
     Page<PropertyDetailDto> getAllProperties(PropertyCriteria criteria, Pageable pageable);
     void deleteProperty(Long id);
     Property getPropertyEntityById(Long id);
+    Page<PropertyDetailDto> getAllPropertiesWithArgentId(PropertyCriteria criteria, Pageable pageable);
 
 }

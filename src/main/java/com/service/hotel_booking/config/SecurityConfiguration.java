@@ -75,6 +75,7 @@ public class SecurityConfiguration {
                         .requestMatchers(new AntPathRequestMatcher("/api/rooms/**", "DELETE")).hasAuthority("ARGENT")
                         .requestMatchers(new AntPathRequestMatcher("/api/rooms", "POST")).hasAuthority("ARGENT")
                         .requestMatchers(new AntPathRequestMatcher("/api/banks")).hasAuthority("ARGENT")
+                        .requestMatchers(new AntPathRequestMatcher("/api/argent/**")).hasAuthority("ARGENT")
 
                         .anyRequest().authenticated()
                 )

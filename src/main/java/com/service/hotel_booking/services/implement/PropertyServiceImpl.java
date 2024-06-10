@@ -1,5 +1,6 @@
 package com.service.hotel_booking.services.implement;
 
+import com.service.hotel_booking.config.jwt.SecurityUtils;
 import com.service.hotel_booking.entities.*;
 import com.service.hotel_booking.entities.request.PropertyRequestDto;
 import com.service.hotel_booking.entities.response.PropertyDetailDto;
@@ -10,10 +11,10 @@ import com.service.hotel_booking.repositories.*;
 import com.service.hotel_booking.services.*;
 import com.service.hotel_booking.services.criteria.AmenityCriteria;
 import com.service.hotel_booking.services.criteria.PropertyCriteria;
+import com.service.hotel_booking.services.query.QueryService;
 import com.service.hotel_booking.services.query.builder.AmenityTypeFilterBuilder;
 import com.service.hotel_booking.services.query.builder.BooleanFilterBuilder;
 import com.service.hotel_booking.services.query.builder.LongFilterBuilder;
-import com.service.hotel_booking.services.query.QueryService;
 import com.service.hotel_booking.utils.FileUtils;
 import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
@@ -117,7 +118,7 @@ public class PropertyServiceImpl extends QueryService<Property> implements Prope
 
     @Override
     public Page<PropertyDetailDto> getAllProperties(PropertyCriteria criteria, Pageable pageable) {
-        Specification<Property> specification = createSpecification(criteria);
+        Specification<Property> specification = createSpecification(criteria, false);
         return propertyRepository.findAll(specification, pageable).map(propertyMapper::toPropertyDetail);
     }
 
@@ -125,11 +126,16 @@ public class PropertyServiceImpl extends QueryService<Property> implements Prope
     @Transactional
     public void deleteProperty(Long id) {
         Property property = this.getPropertyEntityById(id);
+        User user = userService.getUserById(SecurityUtils.getCurrentUserId());
+
+        if (!Objects.equals(user.getId(), property.getArgent().getId())) {
+            throw new BadRequestException(PROPERTY_NOT_EXIST);
+        }
+
         property.getRooms().forEach(room -> {
             room.setStatus(RoomStatus.DELETED);
         });
         property.setStatus(PropertyStatus.DELETED);
-
     }
 
     @Override
@@ -138,8 +144,19 @@ public class PropertyServiceImpl extends QueryService<Property> implements Prope
                                  .orElseThrow(() -> new BadRequestException(PROPERTY_NOT_EXIST));
     }
 
-    private Specification<Property> createSpecification(PropertyCriteria criteria) {
+    @Override
+    public Page<PropertyDetailDto> getAllPropertiesWithArgentId(PropertyCriteria criteria, Pageable pageable) {
+        Specification<Property> specification = createSpecification(criteria, true);
+        return propertyRepository.findAll(specification, pageable).map(propertyMapper::toPropertyDetail);
+    }
+
+    private Specification<Property> createSpecification(PropertyCriteria criteria, boolean isArgent) {
         Specification<Property> specification = Specification.where(null);
+
+        if (isArgent) {
+            specification = specification.and(buildSpecification(LongFilterBuilder.builder().equals(SecurityUtils.getCurrentUserId()).build(),
+                                                                 root -> root.get(Property_.argent).get(User_.id)));
+        }
 
         if (criteria != null) {
             if (Objects.nonNull(criteria.getName())) {
@@ -153,7 +170,5 @@ public class PropertyServiceImpl extends QueryService<Property> implements Prope
 
         return specification;
     }
-
-
 
 }
