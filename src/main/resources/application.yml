@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: hotel-booking-service
+  datasource:
+    url: jdbc:postgresql://hotel-service-db-vuongtx21.g.aivencloud.com:18184/defaultdb?ssl=require&user=avnadmin&password=AVNS_7AsP4LNE5wSu--6EKyP
+    username: avnadmin
+    password: AVNS_7AsP4LNE5wSu--6EKyP
+    driver-class-name: org.postgresql.Driver
+server:
+  port: 8081
+application:
+  cors:
+    allowed-origins: "*"
+    allowed-methods: "*"
+    allowed-headers: "*"
+  security:
+    jwt:
+        secret: rl4MPhP6MuwIJnqNSTJ+AAc3yEN34AmTP+88z5oIvxYGYQ1jTS5hZl3H7TqxR7HP
+        accessTokenInMinutes: 360
+        refreshTokenInHours: 24
