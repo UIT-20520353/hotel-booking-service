@@ -1,8 +1,6 @@
 package spring.api.hotel_booking_service.config;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.experimental.FieldDefaults;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -12,22 +10,31 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.firewall.HttpStatusRequestRejectedHandler;
+import org.springframework.security.web.firewall.RequestRejectedHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.filter.CorsFilter;
 import org.zalando.problem.spring.web.advice.security.SecurityProblemSupport;
+import spring.api.hotel_booking_service.config.jwt.JwtProvider;
+import spring.api.hotel_booking_service.helper.filter.AuthenticationFilter;
+import spring.api.hotel_booking_service.service.UserService;
+import spring.api.hotel_booking_service.service.UserSessionService;
 
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 @Import(SecurityProblemSupport.class)
-@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
-@AllArgsConstructor
-public class Security {
+@RequiredArgsConstructor
+public class SecurityConfiguration {
 
-    SecurityProblemSupport problemSupport;
-    CorsFilter corsFilter;
+    private final SecurityProblemSupport problemSupport;
+    private final CorsFilter corsFilter;
+    private final JwtProvider jwtProvider;
+    private final UserService userService;
+    private final UserSessionService userSessionService;
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
@@ -45,8 +52,23 @@ public class Security {
                         .authenticationEntryPoint(problemSupport)
                         .accessDeniedHandler(problemSupport))
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers(new AntPathRequestMatcher("/")).permitAll());
+                        .requestMatchers(new AntPathRequestMatcher("/")).permitAll()
+                        .anyRequest().authenticated())
+                .addFilterBefore(
+                        new AuthenticationFilter(jwtProvider, userSessionService, userService),
+                        UsernamePasswordAuthenticationFilter.class
+                );
         return http.build();
+    }
+
+    @Bean
+    public BCryptPasswordEncoder cryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public RequestRejectedHandler requestRejectedHandler() {
+        return new HttpStatusRequestRejectedHandler();
     }
 
 }

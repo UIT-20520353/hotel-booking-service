@@ -12,5 +12,6 @@ public class Message {
     // Message
     public static String BODY_MISSING_MSG = "Required request body is missing";
     public static String INTERNAL_SERVER_ERROR = "error.internal-server";
+    public static String UNAUTHORIZED = "error.unauthorized";
 
 }
