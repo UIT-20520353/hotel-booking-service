@@ -107,13 +107,15 @@ public class ExceptionTranslator implements ProblemHandling, SecurityAdviceTrait
     }
 
     private Problem buildInternalExceptionProblem(Problem problem) {
-        String msgCode = problem.getDetail();
+        String msgCode = Objects.requireNonNull(problem.getDetail()).startsWith("error.")
+                ? problem.getDetail()
+                : INTERNAL_SERVER_ERROR;
         String title = problem.getTitle();
         return Problem.builder().withType(
                         Problem.DEFAULT_TYPE.equals(problem.getType())
                                 ? ResponseType.INTERNAL_SERVER_ERROR.getType()
                                 : problem.getType())
-                .withDetail(msgCode != null ? msgCode : INTERNAL_SERVER_ERROR)
+                .withDetail(msgCode)
                 .withTitle(title != null ? title : INTERNAL_SERVER_TITLE)
                 .withStatus(Status.INTERNAL_SERVER_ERROR).build();
     }

@@ -4,9 +4,9 @@ import jakarta.persistence.*;
 import lombok.Getter;
 
 @Entity
-@Table(name = "provinces")
+@Table(name = "districts")
 @Getter
-public class Province {
+public class District {
 
     @Id
     @Column(name = "code")
@@ -28,8 +28,8 @@ public class Province {
     private String codeName;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "administrative_region_id")
-    private AdministrativeRegion administrativeRegion;
+    @JoinColumn(name = "province_code", referencedColumnName = "code")
+    private Province province;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "administrative_unit_id")
