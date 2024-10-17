@@ -8,6 +8,7 @@ public class Message {
     // Title
     public static String BAD_REQUEST_TITLE = "Bad Request";
     public static String UNAUTHORIZED_TITLE = "Unauthorized";
+    public static String INTERNAL_SERVER_TITLE = "Internal Server Error";
 
     // Message
     public static String BODY_MISSING_MSG = "Required request body is missing";

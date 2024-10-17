@@ -18,3 +18,6 @@ application:
         secret: rl4MPhP6MuwIJnqNSTJ+AAc3yEN34AmTP+88z5oIvxYGYQ1jTS5hZl3H7TqxR7HP
         accessTokenInMinutes: 360
         refreshTokenInHours: 24
+springdoc:
+  swagger-ui:
+    path: /swagger-ui

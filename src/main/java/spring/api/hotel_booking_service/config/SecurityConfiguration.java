@@ -52,6 +52,12 @@ public class SecurityConfiguration {
                         .authenticationEntryPoint(problemSupport)
                         .accessDeniedHandler(problemSupport))
                 .authorizeHttpRequests(request -> request
+                        .requestMatchers(new AntPathRequestMatcher("swagger-ui/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/swagger-ui/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("v3/api-docs/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/v3/api-docs/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/api/common/**")).permitAll()
+
                         .requestMatchers(new AntPathRequestMatcher("/")).permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(

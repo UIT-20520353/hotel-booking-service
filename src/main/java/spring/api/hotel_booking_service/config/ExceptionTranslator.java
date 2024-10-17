@@ -8,12 +8,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.zalando.problem.Problem;
 import org.zalando.problem.Status;
 import org.zalando.problem.spring.web.advice.ProblemHandling;
 import org.zalando.problem.spring.web.advice.security.SecurityAdviceTrait;
 import org.zalando.problem.violations.Violation;
+import org.zalando.problem.violations.ConstraintViolationProblem;
+import org.zalando.problem.DefaultProblem;
+import spring.api.hotel_booking_service.helper.enumeration.ResponseType;
+import spring.api.hotel_booking_service.helper.exception.AuthenticationException;
+import spring.api.hotel_booking_service.helper.exception.BadRequestException;
+import spring.api.hotel_booking_service.helper.exception.InternalException;
 
 import java.util.Collection;
 import java.util.Comparator;
@@ -30,17 +37,27 @@ public class ExceptionTranslator implements ProblemHandling, SecurityAdviceTrait
     public ResponseEntity<Problem> process(ResponseEntity<Problem> entity, NativeWebRequest request) {
         Problem problem = entity.getBody();
 
-        if (Objects.nonNull(problem)) {
-            Problem newProblem = Problem
-                    .builder()
-                    .withStatus(problem.getStatus())
-                    .withTitle(problem.getTitle())
-                    .withDetail(INTERNAL_SERVER_ERROR)
-                    .build();
-            return new ResponseEntity<>(newProblem, entity.getHeaders(), entity.getStatusCode());
+        if (problem == null) {
+            return null;
         }
 
-        return ProblemHandling.super.process(entity, request);
+        if (!(problem instanceof ConstraintViolationProblem
+                || problem instanceof DefaultProblem
+                || problem instanceof BadRequestException
+                || problem instanceof InternalException
+                || problem instanceof AuthenticationException)) {
+            return entity;
+        }
+
+        if (problem.getStatus().equals(Status.INTERNAL_SERVER_ERROR) || problem instanceof InternalException) {
+            return new ResponseEntity<>(buildInternalExceptionProblem(problem), entity.getHeaders(), entity.getStatusCode());
+        }
+
+        if (problem.getStatus().equals(Status.UNAUTHORIZED) || problem instanceof AuthenticationException) {
+            return new ResponseEntity<>(buildUnauthorizedProblem(problem), entity.getHeaders(), entity.getStatusCode());
+        }
+
+        return new ResponseEntity<>(buildUnknownExceptionProblem(problem), entity.getHeaders(), entity.getStatusCode());
     }
 
     @Override
@@ -75,6 +92,40 @@ public class ExceptionTranslator implements ProblemHandling, SecurityAdviceTrait
     @ExceptionHandler(ClientAbortException.class)
     public ResponseEntity<?> handleClientAbortException(ClientAbortException ex) {
         return ResponseEntity.noContent().build();
+    }
+
+    private Problem buildUnauthorizedProblem(Problem problem) {
+        String msgCode = problem.getDetail();
+        String title = problem.getTitle();
+        return Problem.builder().withType(
+                        Problem.DEFAULT_TYPE.equals(problem.getType())
+                                ? ResponseType.UNAUTHORIZED.getType()
+                                : problem.getType())
+                .withDetail(msgCode != null ? msgCode : UNAUTHORIZED)
+                .withTitle(title != null ? title : UNAUTHORIZED_TITLE)
+                .withStatus(Status.UNAUTHORIZED).build();
+    }
+
+    private Problem buildInternalExceptionProblem(Problem problem) {
+        String msgCode = problem.getDetail();
+        String title = problem.getTitle();
+        return Problem.builder().withType(
+                        Problem.DEFAULT_TYPE.equals(problem.getType())
+                                ? ResponseType.INTERNAL_SERVER_ERROR.getType()
+                                : problem.getType())
+                .withDetail(msgCode != null ? msgCode : INTERNAL_SERVER_ERROR)
+                .withTitle(title != null ? title : INTERNAL_SERVER_TITLE)
+                .withStatus(Status.INTERNAL_SERVER_ERROR).build();
+    }
+
+    private Problem buildUnknownExceptionProblem(Problem problem) {
+        return Problem.builder().withType(
+                        Problem.DEFAULT_TYPE.equals(problem.getType())
+                                ? ResponseType.UNAUTHORIZED.getType()
+                                : problem.getType())
+                .withDetail("Internal Server Error")
+                .with("test", "error.internal.server")
+                .withStatus(Status.INTERNAL_SERVER_ERROR).build();
     }
 
 }
