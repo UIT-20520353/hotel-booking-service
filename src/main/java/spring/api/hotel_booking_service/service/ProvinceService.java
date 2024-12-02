@@ -7,5 +7,6 @@ import java.util.List;
 public interface ProvinceService {
 
     List<ProvinceDto> getAllProvinces();
+    void getProvinceByCode(String code);
 
 }

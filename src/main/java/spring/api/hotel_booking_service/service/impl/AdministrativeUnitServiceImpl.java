@@ -4,7 +4,8 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
-import spring.api.hotel_booking_service.entity.AdministrativeUnit;
+import spring.api.hotel_booking_service.dto.AdministrativeUnitDto;
+import spring.api.hotel_booking_service.helper.mapper.AdministrativeUnitMapper;
 import spring.api.hotel_booking_service.repository.AdministrativeUnitRepository;
 import spring.api.hotel_booking_service.service.AdministrativeUnitService;
 
@@ -16,10 +17,15 @@ import java.util.List;
 public class AdministrativeUnitServiceImpl implements AdministrativeUnitService {
 
     AdministrativeUnitRepository administrativeUnitRepository;
+    AdministrativeUnitMapper administrativeUnitMapper;
 
     @Override
-    public List<AdministrativeUnit> getAllAdministrativeUnits() {
-        return administrativeUnitRepository.findAll();
+    public List<AdministrativeUnitDto> getAllAdministrativeUnits() {
+        return administrativeUnitRepository
+                .findAll()
+                .stream()
+                .map(administrativeUnitMapper::toAdministrativeUnitDto)
+                .toList();
     }
 
 }

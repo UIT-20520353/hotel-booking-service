@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import spring.api.hotel_booking_service.dto.AdministrativeRegionDto;
+import spring.api.hotel_booking_service.dto.AdministrativeUnitDto;
 import spring.api.hotel_booking_service.dto.ProvinceDto;
 import spring.api.hotel_booking_service.dto.WardDto;
-import spring.api.hotel_booking_service.entity.DistrictDto;
-import spring.api.hotel_booking_service.service.DistrictService;
-import spring.api.hotel_booking_service.service.ProvinceService;
-import spring.api.hotel_booking_service.service.WardService;
+import spring.api.hotel_booking_service.dto.DistrictDto;
+import spring.api.hotel_booking_service.service.*;
 
 import java.util.List;
 
@@ -25,6 +25,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LocationController {
 
+    AdministrativeRegionService administrativeRegionService;
+    AdministrativeUnitService administrativeUnitService;
     ProvinceService provinceService;
     DistrictService districtService;
     WardService wardService;
@@ -42,6 +44,16 @@ public class LocationController {
     @GetMapping("/wards/{districtCode}")
     public ResponseEntity<List<WardDto>> getWardsByDistrictCode(@PathVariable String districtCode) {
         return ResponseEntity.ok(wardService.getWardsByDistrictCode(districtCode));
+    }
+
+    @GetMapping("/administrative-regions")
+    public ResponseEntity<List<AdministrativeRegionDto>> getAllRegions() {
+        return ResponseEntity.ok(administrativeRegionService.getAllRegions());
+    }
+
+    @GetMapping("/administrative-units")
+    public ResponseEntity<List<AdministrativeUnitDto>> getAllAdministrativeUnits() {
+        return ResponseEntity.ok(administrativeUnitService.getAllAdministrativeUnits());
     }
 
 }

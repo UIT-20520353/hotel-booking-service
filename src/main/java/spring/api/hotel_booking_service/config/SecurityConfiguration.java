@@ -57,6 +57,7 @@ public class SecurityConfiguration {
                         .requestMatchers(new AntPathRequestMatcher("v3/api-docs/**")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/v3/api-docs/**")).permitAll()
                         .requestMatchers(new AntPathRequestMatcher("/api/common/**")).permitAll()
+                        .requestMatchers(new AntPathRequestMatcher("/api/authentication/**")).permitAll()
 
                         .requestMatchers(new AntPathRequestMatcher("/")).permitAll()
                         .anyRequest().authenticated())

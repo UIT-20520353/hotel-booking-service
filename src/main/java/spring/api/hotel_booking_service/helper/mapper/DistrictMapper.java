@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Component;
 import spring.api.hotel_booking_service.entity.District;
-import spring.api.hotel_booking_service.entity.DistrictDto;
+import spring.api.hotel_booking_service.dto.DistrictDto;
 
 @Component
 @FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)

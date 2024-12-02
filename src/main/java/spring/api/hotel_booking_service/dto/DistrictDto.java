@@ -1,6 +1,4 @@
-package spring.api.hotel_booking_service.entity;
-
-import spring.api.hotel_booking_service.dto.AdministrativeUnitDto;
+package spring.api.hotel_booking_service.dto;
 
 public record DistrictDto(
         String code,
