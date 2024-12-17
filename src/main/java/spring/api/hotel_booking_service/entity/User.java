@@ -1,10 +1,12 @@
 package spring.api.hotel_booking_service.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import jakarta.persistence.*;
 import spring.api.hotel_booking_service.helper.enumeration.UserRole;
 
 import java.time.Instant;
+import java.util.List;
 
 @Entity
 @Table(name = "t_users")
@@ -33,5 +35,15 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
+    @JsonIgnore
+    @ToString.Exclude
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<UserSession> sessions;
+
+    public void setNewSession(UserSession session) {
+        session.setUser(this);
+        this.sessions.clear();
+        this.sessions.add(session);
+    }
 
 }
