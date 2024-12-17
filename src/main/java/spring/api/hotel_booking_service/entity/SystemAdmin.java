@@ -4,26 +4,24 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "t_admins")
+@Table(name = "t_system_admins")
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Admin {
+public class SystemAdmin {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "email", unique = true, nullable = false)
-    private String email;
-
-    @Column(name = "password", nullable = false)
-    private String password;
-
     @Column(name = "avatar")
     private String avatar;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    private User user;
 
 }

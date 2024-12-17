@@ -49,6 +49,10 @@ public class ExceptionTranslator implements ProblemHandling, SecurityAdviceTrait
             return entity;
         }
 
+        if (problem.getStatus().equals(Status.BAD_REQUEST) || problem instanceof BadRequestException) {
+            return new ResponseEntity<>(buildBadRequestProblem(problem), entity.getHeaders(), entity.getStatusCode());
+        }
+
         if (problem.getStatus().equals(Status.INTERNAL_SERVER_ERROR) || problem instanceof InternalException) {
             return new ResponseEntity<>(buildInternalExceptionProblem(problem), entity.getHeaders(), entity.getStatusCode());
         }
@@ -104,6 +108,18 @@ public class ExceptionTranslator implements ProblemHandling, SecurityAdviceTrait
                 .withDetail(msgCode != null ? msgCode : UNAUTHORIZED)
                 .withTitle(title != null ? title : UNAUTHORIZED_TITLE)
                 .withStatus(Status.UNAUTHORIZED).build();
+    }
+
+    private Problem buildBadRequestProblem(Problem problem) {
+        String msgCode = problem.getDetail();
+        String title = problem.getTitle();
+        return Problem.builder().withType(
+                        Problem.DEFAULT_TYPE.equals(problem.getType())
+                                ? ResponseType.BAD_REQUEST.getType()
+                                : problem.getType())
+                .withDetail(msgCode != null ? msgCode : BAD_REQUEST)
+                .withTitle(title != null ? title : BAD_REQUEST_TITLE)
+                .withStatus(Status.BAD_REQUEST).build();
     }
 
     private Problem buildInternalExceptionProblem(Problem problem) {

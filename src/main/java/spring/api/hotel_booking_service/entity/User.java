@@ -4,8 +4,7 @@ import lombok.*;
 import jakarta.persistence.*;
 import spring.api.hotel_booking_service.helper.enumeration.UserRole;
 
-import java.time.LocalDateTime;
-import java.time.LocalDate;
+import java.time.Instant;
 
 @Entity
 @Table(name = "t_users")
@@ -20,23 +19,19 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "first_name")
-    private String firstName;
-
-    @Column(name = "last_name")
-    private String lastName;
-
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "role")
+    @Column(name = "password", nullable = false)
+    private String password;
+
+    @Column(name = "created_at", nullable = false, updatable = false)
+    @Builder.Default
+    private Instant createdAt = Instant.now();
+
+    @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
-    @Column(name = "date_of_birth")
-    private LocalDate dateOfBirth;
-
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
 
 }

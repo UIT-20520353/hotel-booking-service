@@ -58,8 +58,6 @@ public class JwtProvider {
                                  .setClaims(extraClaims)
                                  .setId(accessTokenId)
                                  .claim("userId", user.getId())
-                                 .claim("firstName", user.getFirstName())
-                                 .claim("lastName", user.getLastName())
                                  .setSubject(user.getEmail())
                                  .claim("refreshId", refreshTokenId)
                                  .claim("authorities", authorities)

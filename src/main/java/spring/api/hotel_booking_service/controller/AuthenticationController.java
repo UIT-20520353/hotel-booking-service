@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import spring.api.hotel_booking_service.dto.login.RequestDto;
 import spring.api.hotel_booking_service.dto.login.ResponseDto;
+import spring.api.hotel_booking_service.dto.register.UserRegisterDto;
 import spring.api.hotel_booking_service.service.AuthenticationService;
 
 @Tag(name = "Authentication")
@@ -26,6 +27,12 @@ public class AuthenticationController {
     @PostMapping("/login")
     public ResponseEntity<ResponseDto> login(@Valid @RequestBody RequestDto requestDto) {
         return ResponseEntity.ok(authenticationService.login(requestDto));
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<Void> register(@Valid @RequestBody UserRegisterDto requestDto) {
+        authenticationService.register(requestDto);
+        return ResponseEntity.noContent().build();
     }
 
 }
