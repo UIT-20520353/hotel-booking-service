@@ -6,6 +6,11 @@ spring:
     username: avnadmin
     password: AVNS_7AsP4LNE5wSu--6EKyP
     driver-class-name: org.postgresql.Driver
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB
 server:
   port: 8081
 application:
@@ -18,6 +23,10 @@ application:
         secret: rl4MPhP6MuwIJnqNSTJ+AAc3yEN34AmTP+88z5oIvxYGYQ1jTS5hZl3H7TqxR7HP
         accessTokenInMinutes: 360
         refreshTokenInHours: 24
+  cloudinary:
+    apiKey: 243447419572893
+    apiSecret: S73WlDGfj8YPpVT0G6645tgD3GQ
+    cloudName: dud5uglbf
 springdoc:
   swagger-ui:
     path: /swagger-ui

@@ -10,7 +10,6 @@ import spring.api.hotel_booking_service.config.jwt.JwtProvider;
 import spring.api.hotel_booking_service.dto.login.RequestDto;
 import spring.api.hotel_booking_service.dto.login.ResponseDto;
 import spring.api.hotel_booking_service.dto.register.UserRegisterDto;
-import spring.api.hotel_booking_service.entity.SystemAdmin;
 import spring.api.hotel_booking_service.entity.User;
 import spring.api.hotel_booking_service.entity.UserSession;
 import spring.api.hotel_booking_service.helper.exception.AuthenticationException;
@@ -32,7 +31,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public ResponseDto login(RequestDto requestDto) {
         User user = userService.findUserByEmail(requestDto.getEmail(), true);
 
-        System.out.println(passwordEncoder.encode("Admin@123456"));
+        if (!user.getRole().equals(requestDto.getLoginType())) {
+            throw new AuthenticationException(INVALID_CREDENTIAL_ERR);
+        }
 
         if (!passwordEncoder.matches(requestDto.getPassword(), user.getPassword())) {
             throw new AuthenticationException(INVALID_CREDENTIAL_ERR);

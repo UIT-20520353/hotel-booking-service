@@ -15,6 +15,7 @@ public class ApplicationProperties {
 
     CorsConfiguration cors;
     SecurityProperties security;
+    CloudinaryProperties cloudinary;
 
     public record SecurityProperties(
             JwtProperties jwt
@@ -24,6 +25,12 @@ public class ApplicationProperties {
             String secret,
             long accessTokenInMinutes,
             long refreshTokenInHours
+    ) {}
+
+    public record CloudinaryProperties(
+            String apiKey,
+            String apiSecret,
+            String cloudName
     ) {}
 
 }

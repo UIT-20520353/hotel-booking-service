@@ -1,5 +1,6 @@
 package spring.api.hotel_booking_service.config;
 
+import com.cloudinary.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -63,6 +64,14 @@ public class WebConfig implements WebMvcConfigurer {
         source.registerCorsConfiguration("/v3/api-docs", config);
         source.registerCorsConfiguration("/swagger-ui/**", config);
         return new CorsFilter(source);
+    }
+
+    @Bean
+    public Cloudinary cloudinary() {
+        String cloudinaryUrl = "cloudinary://" + applicationProperties.getCloudinary().apiKey() +
+                               ":" + applicationProperties.getCloudinary().apiSecret() + "@" +
+                               applicationProperties.getCloudinary().cloudName();
+        return new Cloudinary(cloudinaryUrl);
     }
 
 }

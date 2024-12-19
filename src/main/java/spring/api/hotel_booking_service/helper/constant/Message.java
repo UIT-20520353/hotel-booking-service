@@ -26,6 +26,9 @@ public class Message {
     public static final String PASSWORD_REQUIRED_ERROR = "error.validate.password.required";
     public static final String LOGIN_TYPE_REQUIRED_ERROR = "error.validate.login-type.required";
 
+    public static final String IMAGE_REQUIRED_ERROR = "error.validate.image.required";
+    public static final String IMAGE_UPLOAD_FAIL_ERROR = "error.validate.image.upload-fail";
+
     public static final String FIRST_NAME_REQUIRED_ERROR = "error.validate.first-name.required";
     public static final String LAST_NAME_REQUIRED_ERROR = "error.validate.last-name.required";
     public static final String DATE_OF_BIRTH_REQUIRED_ERROR = "error.validate.date-of-birth.required";
