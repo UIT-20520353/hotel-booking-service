@@ -11,12 +11,6 @@ spring:
       enabled: true
       max-file-size: 10MB
       max-request-size: 10MB
-  jpa:
-    properties:
-      hibernate:
-        globally_quoted_identifiers: true
-        jdbc.use_specified_scale: false
-        database-platform: org.hibernate.spatial.dialect.postgis.PostgisDialect
 server:
   port: 8081
 application:

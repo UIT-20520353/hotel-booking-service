@@ -2,9 +2,6 @@ package spring.api.hotel_booking_service.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.locationtech.jts.geom.Point;
-
-import java.math.BigDecimal;
 
 @Entity
 @Table(name = "t_attractions")
@@ -39,8 +36,5 @@ public class Attraction {
 
     @Column(precision = 9, scale = 6, name = "longitude", nullable = false)
     private Double longitude;
-
-    @Column(name = "geom", nullable = false)
-    private Point geom;
 
 }

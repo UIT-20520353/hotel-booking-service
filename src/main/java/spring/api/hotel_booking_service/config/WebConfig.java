@@ -7,7 +7,6 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.locationtech.jts.geom.GeometryFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
@@ -73,11 +72,6 @@ public class WebConfig implements WebMvcConfigurer {
                                ":" + applicationProperties.getCloudinary().apiSecret() + "@" +
                                applicationProperties.getCloudinary().cloudName();
         return new Cloudinary(cloudinaryUrl);
-    }
-
-    @Bean
-    public GeometryFactory geometryFactory() {
-        return new GeometryFactory();
     }
 
 }
