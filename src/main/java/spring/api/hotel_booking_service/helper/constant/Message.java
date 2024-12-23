@@ -37,4 +37,20 @@ public class Message {
     public static final String USER_NOT_FOUND_ERROR = "error.user.not-found";
     public static final String INVALID_CREDENTIAL_ERR = "error.validate.login.invalid-credential";
 
+    // Attraction
+    public static final String ATTRACTION_NOT_FOUND = "error.attraction.not-found";
+    public static final String ATTRACTION_NAME_REQUIRED_ERROR = "error.validate.attraction.name.required";
+    public static final String ATTRACTION_NAME_MAX_LENGTH_ERROR = "error.validate.attraction.name.max-length";
+    public static final String ATTRACTION_DESCRIPTION_REQUIRED_ERROR = "error.validate.attraction.description.required";
+    public static final String ATTRACTION_ADDRESS_REQUIRED_ERROR = "error.validate.attraction.address.required";
+    public static final String ATTRACTION_OVERVIEW_IMAGE_REQUIRED_ERROR = "error.validate.attraction.overview-image.required";
+    public static final String ATTRACTION_SUMMARY_REQUIRED_ERROR = "error.validate.attraction.summary.required";
+    public static final String ATTRACTION_LATITUDE_REQUIRED_ERROR = "error.validate.attraction.latitude.required";
+    public static final String ATTRACTION_LONGITUDE_REQUIRED_ERROR = "error.validate.attraction.longitude.required";
+    public static final String ATTRACTION_OVERVIEW_IMAGE_INVALID = "error.validate.attraction.overview-image.invalid";
+
+    // File
+    public static final String FILE_SIZE_ERROR = "error.validate.file.size";
+    public static final String FILE_TYPE_ERROR = "error.validate.file.type";
+
 }

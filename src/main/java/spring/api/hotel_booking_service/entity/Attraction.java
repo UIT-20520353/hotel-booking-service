@@ -2,6 +2,7 @@ package spring.api.hotel_booking_service.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.locationtech.jts.geom.Point;
 
 import java.math.BigDecimal;
 
@@ -27,10 +28,19 @@ public class Attraction {
     @Column(name = "address", nullable = false)
     private String address;
 
+    @Column(name = "overview_image", nullable = false)
+    private String overviewImage;
+
+    @Column(name = "summary", nullable = false)
+    private String summary;
+
     @Column(precision = 9, scale = 6, name = "latitude", nullable = false)
-    private BigDecimal latitude;
+    private Double latitude;
 
     @Column(precision = 9, scale = 6, name = "longitude", nullable = false)
-    private BigDecimal longitude;
+    private Double longitude;
+
+    @Column(name = "geom", nullable = false)
+    private Point geom;
 
 }
