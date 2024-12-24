@@ -5,6 +5,8 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +33,8 @@ public class LocationController {
     DistrictService districtService;
     WardService wardService;
 
+    private final JavaMailSender mailSender;
+
     @GetMapping("/provinces")
     public ResponseEntity<List<ProvinceDto>> getAllProvinces() {
         return ResponseEntity.ok(provinceService.getAllProvinces());
@@ -54,6 +58,17 @@ public class LocationController {
     @GetMapping("/administrative-units")
     public ResponseEntity<List<AdministrativeUnitDto>> getAllAdministrativeUnits() {
         return ResponseEntity.ok(administrativeUnitService.getAllAdministrativeUnits());
+    }
+
+    @GetMapping("/test")
+    public void test() {
+        SimpleMailMessage message = new SimpleMailMessage();
+
+        message.setFrom("ngohoang8320@gmail.com");
+        message.setTo("ngocanh2210200@gmail.com");
+        message.setSubject("Test");
+        message.setText("This is a test");
+        mailSender.send(message);
     }
 
 }

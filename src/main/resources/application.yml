@@ -17,6 +17,12 @@ spring:
         globally_quoted_identifiers: true
         jdbc.use_specified_scale: false
         database-platform: org.hibernate.spatial.dialect.postgis.PostgisDialect
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    protocol: smtp
+    username: ${USERNAME_MAIL:}
+    password: ${USERNAME_PASSWORD:}
 server:
   port: 8081
 application:
