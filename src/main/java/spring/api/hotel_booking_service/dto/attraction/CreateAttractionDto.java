@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.math.BigDecimal;
+
 import static spring.api.hotel_booking_service.helper.constant.Message.*;
 
 @Data
@@ -28,9 +30,9 @@ public class CreateAttractionDto {
     private String summary;
 
     @NotNull(message = ATTRACTION_LATITUDE_REQUIRED_ERROR)
-    private Double latitude;
+    private BigDecimal latitude;
 
     @NotNull(message = ATTRACTION_LONGITUDE_REQUIRED_ERROR)
-    private Double longitude;
+    private BigDecimal longitude;
 
 }

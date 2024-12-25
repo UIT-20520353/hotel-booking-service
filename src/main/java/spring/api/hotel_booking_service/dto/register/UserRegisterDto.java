@@ -9,7 +9,6 @@ import spring.api.hotel_booking_service.helper.enumeration.UserGender;
 import java.time.Instant;
 
 import static spring.api.hotel_booking_service.helper.constant.Message.*;
-import static spring.api.hotel_booking_service.helper.constant.Message.LOGIN_TYPE_REQUIRED_ERROR;
 
 @Data
 public class UserRegisterDto {

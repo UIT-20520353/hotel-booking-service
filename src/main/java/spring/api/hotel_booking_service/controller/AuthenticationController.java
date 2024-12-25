@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import spring.api.hotel_booking_service.dto.login.RequestDto;
 import spring.api.hotel_booking_service.dto.login.ResponseDto;
+import spring.api.hotel_booking_service.dto.profile.CustomerDto;
 import spring.api.hotel_booking_service.dto.register.UserRegisterDto;
 import spring.api.hotel_booking_service.service.AuthenticationService;
 
@@ -29,6 +30,11 @@ public class AuthenticationController {
     @PostMapping("/register")
     public ResponseEntity<Void> register(@Valid @RequestBody UserRegisterDto requestDto) {
         authenticationService.register(requestDto);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/profile/customer")
+    public ResponseEntity<CustomerDto> getCustomerProfile() {
         return ResponseEntity.noContent().build();
     }
 

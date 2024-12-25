@@ -53,4 +53,7 @@ public class Message {
     public static final String FILE_SIZE_ERROR = "error.validate.file.size";
     public static final String FILE_TYPE_ERROR = "error.validate.file.type";
 
+    // User
+    public static final String USER_EMAIL_EXISTED = "error.user.email-existed";
+
 }

@@ -3,6 +3,8 @@ package spring.api.hotel_booking_service.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table(name = "t_attractions")
 @Getter
@@ -32,9 +34,9 @@ public class Attraction {
     private String summary;
 
     @Column(precision = 9, scale = 6, name = "latitude", nullable = false)
-    private Double latitude;
+    private BigDecimal latitude;
 
     @Column(precision = 9, scale = 6, name = "longitude", nullable = false)
-    private Double longitude;
+    private BigDecimal longitude;
 
 }
