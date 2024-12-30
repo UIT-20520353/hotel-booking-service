@@ -56,4 +56,33 @@ public class Message {
     // User
     public static final String USER_EMAIL_EXISTED = "error.user.email-existed";
 
+    // Business Owner
+    public static final String BUSINESS_OWNER_NOT_FOUND = "error.business-owner.not-found";
+    public static final String BUSINESS_NAME_REQUIRED_ERROR = "error.validate.business-name.required";
+    public static final String PHONE_NUMBER_REQUIRED_ERROR = "error.validate.phone-number.required";
+    public static final String ADDRESS_REQUIRED_ERROR = "error.validate.address.required";
+    public static final String BUSINESS_ID_REQUIRED_ERROR = "error.validate.business-id.required";
+    public static final String FRONT_IDENTITY_CARD_REQUIRED_ERROR = "error.validate.front-identity-card.required";
+    public static final String BACK_IDENTITY_CARD_REQUIRED_ERROR = "error.validate.back-identity-card.required";
+    public static final String SELFIE_IMAGE_REQUIRED_ERROR = "error.validate.selfie-image.required";
+    public static final String FRONT_IDENTITY_CARD_INVALID = "error.validate.front-identity-card.invalid";
+    public static final String BACK_IDENTITY_CARD_INVALID = "error.validate.back-identity-card.invalid";
+    public static final String SELFIE_IMAGE_INVALID = "error.validate.selfie-image.invalid";
+    public static final String BUSINESS_OWNER_ACCOUNT_PENDING = "error.business-owner.account-pending";
+    public static final String BUSINESS_OWNER_ACCOUNT_REJECTED = "error.business-owner.account-rejected";
+    public static final String BUSINESS_OWNER_APPROVED = "error.business-owner.account-already-approved";
+    public static final String BUSINESS_OWNER_REJECTED = "error.business-owner.account-already-rejected";
+
+    // Hotel
+    public static final String HOTEL_NOT_FOUND = "error.hotel.not-found";
+    public static final String HOTEL_NAME_REQUIRED_ERROR = "error.validate.hotel.name.required";
+    public static final String HOTEL_ADDRESS_REQUIRED_ERROR = "error.validate.hotel.address.required";
+    public static final String HOTEL_DESCRIPTION_REQUIRED_ERROR = "error.validate.hotel.description.required";
+    public static final String HOTEL_LATITUDE_REQUIRED_ERROR = "error.validate.hotel.latitude.required";
+    public static final String HOTEL_LONGITUDE_REQUIRED_ERROR = "error.validate.hotel.longitude.required";
+    public static final String HOTEL_OVERVIEW_IMAGE_REQUIRED_ERROR = "error.validate.hotel.overview-image.required";
+    public static final String HOTEL_IMAGES_REQUIRED_ERROR = "error.validate.hotel.images.required";
+    public static final String HOTEL_OVERVIEW_IMAGE_INVALID = "error.validate.hotel.overview-image.invalid";
+    public static final String HOTEL_IMAGE_INVALID = "error.validate.hotel.image.invalid";
+
 }

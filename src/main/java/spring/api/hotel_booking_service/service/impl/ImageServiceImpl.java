@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import spring.api.hotel_booking_service.helper.exception.BadRequestException;
 import spring.api.hotel_booking_service.service.ImageService;
 
+import java.util.List;
 import java.util.Map;
 
 import static spring.api.hotel_booking_service.helper.constant.Message.*;
@@ -23,7 +24,6 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public String uploadImage(MultipartFile file) {
-        System.out.println(file.getContentType());
         if (file.isEmpty()) {
             throw new BadRequestException(IMAGE_REQUIRED_ERROR);
         }
@@ -35,6 +35,11 @@ public class ImageServiceImpl implements ImageService {
         } catch (Exception e) {
             throw new BadRequestException(IMAGE_UPLOAD_FAIL_ERROR);
         }
+    }
+
+    @Override
+    public List<String> uploadImages(List<MultipartFile> files) {
+        return files.stream().map(this::uploadImage).toList();
     }
 
 }

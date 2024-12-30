@@ -1,5 +1,6 @@
 package spring.api.hotel_booking_service.service.impl;
 
+import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
@@ -33,6 +34,23 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email)
+                             .orElseThrow(() -> new BadRequestException(USER_NOT_FOUND_ERROR));
+    }
+
+    @Override
+    public Boolean isEmailExist(String email) {
+        return userRepository.findByEmail(email).isPresent();
+    }
+
+    @Override
+    @Transactional
+    public User save(User user) {
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User findUserById(Long id) {
+        return userRepository.findById(id)
                              .orElseThrow(() -> new BadRequestException(USER_NOT_FOUND_ERROR));
     }
 }

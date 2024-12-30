@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import spring.api.hotel_booking_service.dto.login.RequestDto;
 import spring.api.hotel_booking_service.dto.login.ResponseDto;
 import spring.api.hotel_booking_service.dto.profile.CustomerDto;
+import spring.api.hotel_booking_service.dto.register.BusinessOwnerRegister;
 import spring.api.hotel_booking_service.dto.register.UserRegisterDto;
 import spring.api.hotel_booking_service.service.AuthenticationService;
 
@@ -35,6 +36,12 @@ public class AuthenticationController {
 
     @GetMapping("/profile/customer")
     public ResponseEntity<CustomerDto> getCustomerProfile() {
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping(path = "/register/business-owner", consumes = "multipart/form-data")
+    public ResponseEntity<Void> registerBusinessOwner(@Valid @ModelAttribute BusinessOwnerRegister requestDto) {
+        authenticationService.registerBusinessOwner(requestDto);
         return ResponseEntity.noContent().build();
     }
 

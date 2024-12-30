@@ -15,6 +15,7 @@ import spring.api.hotel_booking_service.helper.exception.BadRequestException;
 import spring.api.hotel_booking_service.repository.CustomerRepository;
 import spring.api.hotel_booking_service.repository.UserRepository;
 import spring.api.hotel_booking_service.service.CustomerService;
+import spring.api.hotel_booking_service.service.UserService;
 
 import static spring.api.hotel_booking_service.helper.constant.Message.USER_EMAIL_EXISTED;
 
@@ -23,19 +24,18 @@ import static spring.api.hotel_booking_service.helper.constant.Message.USER_EMAI
 @RequiredArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
 
-    UserRepository userRepository;
     CustomerRepository customerRepository;
     BCryptPasswordEncoder passwordEncoder;
+    UserService userService;
 
     @Override
     @Transactional
     public void createCustomer(UserRegisterDto requestDto) {
-        userRepository.findByEmail(requestDto.getEmail())
-                .ifPresent(user -> {
-                    throw new BadRequestException(USER_EMAIL_EXISTED);
-                });
+        if (userService.isEmailExist(requestDto.getEmail())) {
+            throw new BadRequestException(USER_EMAIL_EXISTED);
+        }
 
-        User user = userRepository.save(User.builder()
+        User user = userService.save(User.builder()
                                             .email(requestDto.getEmail())
                                             .password(passwordEncoder.encode(requestDto.getPassword()))
                                             .role(UserRole.CUSTOMER)
