@@ -85,4 +85,11 @@ public class Message {
     public static final String HOTEL_OVERVIEW_IMAGE_INVALID = "error.validate.hotel.overview-image.invalid";
     public static final String HOTEL_IMAGE_INVALID = "error.validate.hotel.image.invalid";
 
+    // Hotel Amenity
+    public static final String HOTEL_AMENITY_NOT_FOUND = "error.hotel-amenity.not-found";
+    public static final String HOTEL_AMENITY_NAME_REQUIRED_ERROR = "error.validate.hotel-amenity.name.required";
+    public static final String HOTEL_AMENITY_UNIT_REQUIRED_ERROR = "error.validate.hotel-amenity.unit.required";
+    public static final String HOTEL_AMENITY_PRICE_REQUIRED_ERROR = "error.validate.hotel-amenity.price.required";
+    public static final String HOTEL_AMENITY_PRICE_MIN_ERROR = "error.validate.hotel-amenity.price-min";
+
 }

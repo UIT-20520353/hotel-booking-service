@@ -7,19 +7,18 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import spring.api.hotel_booking_service.config.jwt.SecurityUtils;
+import spring.api.hotel_booking_service.dto.hotel.CreateAmenityDto;
 import spring.api.hotel_booking_service.dto.hotel.CreateHotelDto;
 import spring.api.hotel_booking_service.entity.BusinessOwner;
 import spring.api.hotel_booking_service.entity.Hotel;
+import spring.api.hotel_booking_service.entity.HotelAmenity;
 import spring.api.hotel_booking_service.entity.HotelImage;
 import spring.api.hotel_booking_service.helper.enumeration.HotelImageType;
 import spring.api.hotel_booking_service.helper.enumeration.HotelStatus;
 import spring.api.hotel_booking_service.helper.exception.BadRequestException;
 import spring.api.hotel_booking_service.helper.util.FileUtils;
 import spring.api.hotel_booking_service.repository.HotelRepository;
-import spring.api.hotel_booking_service.service.BusinessOwnerService;
-import spring.api.hotel_booking_service.service.HotelImageService;
-import spring.api.hotel_booking_service.service.HotelService;
-import spring.api.hotel_booking_service.service.ImageService;
+import spring.api.hotel_booking_service.service.*;
 
 import java.util.List;
 
@@ -34,6 +33,7 @@ public class HotelServiceImpl implements HotelService {
     ImageService imageService;
     HotelRepository hotelRepository;
     HotelImageService hotelImageService;
+    HotelAmenityService hotelAmenityService;
 
     @Override
     @Transactional
@@ -73,6 +73,23 @@ public class HotelServiceImpl implements HotelService {
         Hotel hotel = hotelRepository.findById(id).orElseThrow(() -> new BadRequestException(HOTEL_NOT_FOUND));
         hotel.setStatus(HotelStatus.DELETED);
         hotelRepository.save(hotel);
+    }
+
+    @Override
+    @Transactional
+    public void addAmenity(Long id, CreateAmenityDto body) {
+        Hotel hotel = this.getHotel(id);
+        hotelAmenityService.save(HotelAmenity.builder()
+                .name(body.getName())
+                .unit(body.getUnit())
+                .hotel(hotel)
+                .price(body.getPrice())
+                .build());
+    }
+
+    @Override
+    public Hotel getHotel(Long id) {
+        return hotelRepository.findById(id).orElseThrow(() -> new BadRequestException(HOTEL_NOT_FOUND));
     }
 
 }

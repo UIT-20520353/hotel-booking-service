@@ -21,10 +21,6 @@ public class Hotel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "owner_id", referencedColumnName = "id")
-    BusinessOwner owner;
-
     @Column(name = "name", nullable = false)
     private String name;
 
@@ -42,9 +38,16 @@ public class Hotel {
 
     @Column(name = "status", nullable = false)
     @Enumerated(EnumType.STRING)
-    HotelStatus status;
+    private HotelStatus status;
 
     @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<HotelImage> images;
+
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<HotelAmenity> amenities;
+
+    @ManyToOne
+    @JoinColumn(name = "owner_id", referencedColumnName = "id")
+    private BusinessOwner owner;
 
 }

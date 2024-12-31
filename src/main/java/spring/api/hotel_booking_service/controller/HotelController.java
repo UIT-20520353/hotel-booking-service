@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import spring.api.hotel_booking_service.dto.hotel.CreateAmenityDto;
 import spring.api.hotel_booking_service.dto.hotel.CreateHotelDto;
 import spring.api.hotel_booking_service.service.HotelService;
 
@@ -19,6 +20,11 @@ public class HotelController {
 
     HotelService hotelService;
 
+    @GetMapping
+    public ResponseEntity<?> getHotels() {
+        return ResponseEntity.ok(hotelService.getHotels());
+    }
+
     @PostMapping(consumes = "multipart/form-data")
     public ResponseEntity<Void> createHotel(@Valid @ModelAttribute CreateHotelDto body) {
         hotelService.createHotel(body);
@@ -28,6 +34,12 @@ public class HotelController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteHotel(@PathVariable Long id) {
         hotelService.deleteHotel(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/{id}/amenities")
+    public ResponseEntity<Void> addAmenity(@PathVariable Long id, @RequestBody CreateAmenityDto body) {
+        hotelService.addAmenity(id, body);
         return ResponseEntity.noContent().build();
     }
 
