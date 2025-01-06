@@ -20,11 +20,6 @@ public class HotelController {
 
     HotelService hotelService;
 
-    @GetMapping
-    public ResponseEntity<?> getHotels() {
-        return ResponseEntity.ok(hotelService.getHotels());
-    }
-
     @PostMapping(consumes = "multipart/form-data")
     public ResponseEntity<Void> createHotel(@Valid @ModelAttribute CreateHotelDto body) {
         hotelService.createHotel(body);
